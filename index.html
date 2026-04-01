@@ -539,14 +539,68 @@
             }
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             .nav-links {
-                gap: 1rem;
-                font-size: 12px;
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, #1B5E4C, #2D8B7A);
+                padding: 1rem 1.5rem;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 10px 0;
+                font-size: 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .navbar {
+                position: sticky;
+                top: 0;
+            }
+
+            .hero {
+                padding: 2.5rem 1.5rem;
+                border-radius: 8px;
             }
 
             .hero h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .hero p {
@@ -559,20 +613,23 @@
 
             .btn-primary, .btn-secondary {
                 width: 100%;
+                text-align: center;
             }
 
             .section {
-                padding: 1.5rem;
+                padding: 1.25rem;
             }
 
             .tabs {
-                gap: 0.5rem;
+                gap: 0;
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .tab {
-                padding: 10px 16px;
+                padding: 10px 14px;
                 font-size: 12px;
+                white-space: nowrap;
             }
 
             .highlight-grid {
@@ -583,16 +640,32 @@
                 grid-template-columns: 1fr;
             }
 
-            .salary-value {
-                font-size: 28px;
-            }
-
             .cta-section {
-                padding: 2rem 1.5rem;
+                padding: 2rem 1.25rem;
+                border-radius: 8px;
             }
 
             .cta-section h2 {
-                font-size: 24px;
+                font-size: 22px;
+            }
+
+            .benefit-item {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .highlight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-value {
+                font-size: 22px;
             }
         }
 
@@ -620,11 +693,15 @@
     <!-- NAVBAR -->
     <div class="navbar">
         <div class="navbar-logo">🚀 Zonda Tech Chile</div>
-        <div class="nav-links">
+        <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
             <a onclick="switchTab(event, 'posicion')">Posición</a>
             <a onclick="switchTab(event, 'requisitos')">Requisitos</a>
             <a onclick="switchTab(event, 'kpis')">KPIs</a>
-            <a onclick="switchTab(event, 'compensacion')">Compensación</a>
             <a onclick="switchTab(event, 'proceso')">Proceso</a>
             <a onclick="switchTab(event, 'empresa')">Empresa</a>
         </div>
@@ -655,11 +732,6 @@
                 <div class="highlight-subtitle">Modalidad Híbrida</div>
             </div>
             <div class="highlight-card">
-                <div class="highlight-label">Sueldo Base</div>
-                <div class="highlight-value">$4.2-5.8K</div>
-                <div class="highlight-subtitle">USD Mensuales</div>
-            </div>
-            <div class="highlight-card">
                 <div class="highlight-label">Reporta a</div>
                 <div class="highlight-value">CEO</div>
                 <div class="highlight-subtitle">Dirección Ejecutiva</div>
@@ -671,7 +743,6 @@
             <div class="tab active" onclick="switchTab(event, 'posicion')">Posición</div>
             <div class="tab" onclick="switchTab(event, 'requisitos')">Requisitos</div>
             <div class="tab" onclick="switchTab(event, 'kpis')">KPIs</div>
-            <div class="tab" onclick="switchTab(event, 'compensacion')">Compensación</div>
             <div class="tab" onclick="switchTab(event, 'proceso')">Proceso</div>
             <div class="tab" onclick="switchTab(event, 'empresa')">Empresa</div>
         </div>
@@ -950,100 +1021,6 @@
             </div>
         </div>
 
-        <!-- TAB 4: COMPENSACIÓN -->
-        <div id="compensacion" class="tab-content">
-            <div class="section">
-                <h2>Compensación y Beneficios</h2>
-
-                <div class="salary-highlight">
-                    <div class="salary-label">Sueldo Base Mensual</div>
-                    <div class="salary-value">$4.200 - $5.800 USD</div>
-                    <div class="salary-note">
-                        <p><strong>Equivalente en CLP:</strong> $3.570.000 - $4.930.000 pesos (aprox.)</p>
-                        <p style="margin-top: 0.5rem;"><strong>Nota:</strong> El sueldo es negociable según experiencia, track record y conocimiento de mercado LATAM</p>
-                    </div>
-                </div>
-
-                <h3>Compensación Variable</h3>
-                <div class="card" style="margin-bottom: 1.5rem;">
-                    <h3>Bonificación por Desempeño</h3>
-                    <p><strong>Hasta 30% anual</strong> basada en cumplimiento de KPIs corporativos</p>
-                    <p style="margin-top: 0.75rem; font-size: 13px; color: #666;">Pagada trimestralmente según avance en objetivos. Requiere cumplimiento demostrables de metas.</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Beneficios Complementarios</h3>
-                <div style="display: grid; gap: 1.5rem;">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">%</div>
-                        <div class="benefit-text">
-                            <h4>Bonificación por Desempeño</h4>
-                            <p>Hasta 30% del salario anual basada en cumplimiento de KPIs corporativos. Pagos trimestrales.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">
-                            <h4>Seguro de Salud Integral</h4>
-                            <p>Cobertura médica completa para empleado y cargas familiares. Libre elección: Fonasa o Isapre.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">⌂</div>
-                        <div class="benefit-text">
-                            <h4>Flexibilidad Laboral</h4>
-                            <p>2 días presencial en oficina, 3 días home office. Horarios flexibles con disponibilidad para reuniones estratégicas.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">📚</div>
-                        <div class="benefit-text">
-                            <h4>Presupuesto de Capacitación Anual</h4>
-                            <p>$800 USD anuales para cursos, certificaciones, conferencias y desarrollo profesional continuo.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🍴</div>
-                        <div class="benefit-text">
-                            <h4>Vale Alimentario + Transporte</h4>
-                            <p>$60 USD mensuales en vale alimentario. Subsidio adicional para locomoción.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🚀</div>
-                        <div class="benefit-text">
-                            <h4>Ambiente Laboral Innovador</h4>
-                            <p>Equipo joven, dinámico y de alto desempeño. Flat hierarchy con innovación como ADN corporativo.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">💼</div>
-                        <div class="benefit-text">
-                            <h4>Desarrollo Profesional</h4>
-                            <p>Mentoring ejecutivo y oportunidades de crecimiento hacia VP Marketing o Chief Marketing Officer.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🌍</div>
-                        <div class="benefit-text">
-                            <h4>Proyección Internacional</h4>
-                            <p>Oportunidad de liderar expansión a Latinoamérica. Viajes ocasionales a conferencias regionales.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 2rem; background: #F5F8F6;">
-                    <h3>Compensación Total Estimada (Anual)</h3>
-                    <p style="margin-bottom: 1rem;">Para un candidato promedio con sueldo base de $4.700 USD:</p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li><strong>Sueldo Base:</strong> $56.400 USD</li>
-                        <li><strong>Bonificación Promedio (20%):</strong> $11.280 USD</li>
-                        <li><strong>Beneficios Complementarios:</strong> ~$3.680 USD (seguro, vale, capacitación)</li>
-                        <li style="margin-top: 1rem; border-top: 1px solid #ddd; padding-top: 1rem;"><strong>TOTAL ANUAL:</strong> $71.360 USD aprox. ($60.6M CLP)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <!-- TAB 5: PROCESO -->
         <div id="proceso" class="tab-content">
             <div class="section">
@@ -1258,6 +1235,11 @@
     </footer>
 
     <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
+
         function switchTab(event, tabName) {
             event.preventDefault();
             
@@ -1274,8 +1256,9 @@
             
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Cerrar menú móvil si está abierto
+            document.getElementById('navLinks').classList.remove('open');
         }
 
         function scrollToContact() {
