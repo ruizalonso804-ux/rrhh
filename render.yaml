@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: zonda-tech-jobs
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: CONTACT_EMAIL
+        value: reclutamiento@zondatech.cl
+      - key: COMPANY_NAME
+        value: Zonda Tech Chile
+      - key: SITE_URL
+        fromDatabase:
+          name: zonda-db
+          property: externalUrl
