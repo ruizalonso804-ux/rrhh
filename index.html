@@ -69,6 +69,38 @@
 
         .navbar-right a:hover { color: white; }
 
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
         /* ── HERO ── */
         .hero {
             background: linear-gradient(135deg, #0d3d30 0%, #1B5E4C 50%, #2D8B7A 100%);
@@ -550,21 +582,70 @@
             .values-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+
+            .navbar-right {
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, #1B5E4C, #2D8B7A);
+                padding: 0.5rem 1.5rem 1rem;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+            }
+
+            .navbar-right.open { display: flex; }
+
+            .navbar-right a {
+                padding: 12px 0;
+                font-size: 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+            }
+
+            .navbar-right a:last-child { border-bottom: none; }
+
+            .navbar { position: sticky; top: 0; }
+
+            .hero { padding: 3rem 1.5rem 2.5rem; }
             .hero h1 { font-size: 28px; }
             .hero p { font-size: 15px; }
             .hero-stats { gap: 1.5rem; }
             .hero-stat-value { font-size: 24px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .section { padding: 3rem 0; }
+            .section-title { font-size: 24px; }
+            .stats-section { padding: 3rem 0; }
+
             .values-grid { grid-template-columns: 1fr; }
             .benefits-grid { grid-template-columns: 1fr; }
-            .job-card { grid-template-columns: 1fr; }
+
+            .job-card {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
             .job-actions { align-items: flex-start; }
             .btn-ver { width: 100%; text-align: center; }
+
             .navbar-logo span { font-size: 20px; }
             .navbar-logo img { height: 44px; }
-            .navbar-right { display: none; }
-            .section-title { font-size: 24px; }
+
+            .cta-bottom { padding: 3rem 1.5rem; }
+            .cta-bottom h2 { font-size: 22px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 24px; }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); display: grid; gap: 1rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .stat-value { font-size: 30px; }
+            .job-title { font-size: 17px; }
+            .navbar-logo span { font-size: 17px; letter-spacing: 1px; }
+            .navbar-logo img { height: 38px; }
         }
     </style>
 </head>
@@ -576,10 +657,15 @@
             <img src="logo_zonda_tech.png" alt="Zonda Tech Chile">
             <span>Zonda Tech Chile</span>
         </a>
-        <div class="navbar-right">
-            <a href="#sobre-nosotros">Sobre Nosotros</a>
-            <a href="#puestos">Puestos Disponibles</a>
-            <a href="#contacto">Contacto</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="navbar-right" id="navLinks">
+            <a href="#sobre-nosotros" onclick="closeMenu()">Sobre Nosotros</a>
+            <a href="#puestos" onclick="closeMenu()">Puestos Disponibles</a>
+            <a href="#contacto" onclick="closeMenu()">Contacto</a>
         </div>
     </nav>
 
@@ -823,6 +909,20 @@
         <p>&copy; 2026 Zonda Tech Chile. Todos los derechos reservados.</p>
         <p>Portal Interno de Empleo · www.zondatech.cl</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+        }
+    </script>
 
 </body>
 </html>

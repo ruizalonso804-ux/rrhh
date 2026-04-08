@@ -560,6 +560,8 @@
             gap: 5px;
             cursor: pointer;
             padding: 4px;
+            background: none;
+            border: none;
         }
 
         .hamburger span {
@@ -570,6 +572,31 @@
             border-radius: 2px;
             transition: all 0.3s ease;
         }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .back-link {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: white; }
 
         @media (max-width: 768px) {
             .hamburger {
@@ -754,12 +781,13 @@
             <img src="logo_zonda_tech.png" alt="Zonda Tech Chile">
             <span>Zonda Tech Chile</span>
         </div>
-        <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+        <button class="hamburger" onclick="toggleMenu()" id="hamburger" aria-label="Menú">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
         <div class="nav-links" id="navLinks">
+            <a href="/" class="back-link">← Portal</a>
             <a onclick="switchTab(event, 'posicion')">Posición</a>
             <a onclick="switchTab(event, 'requisitos')">Requisitos</a>
             <a onclick="switchTab(event, 'kpis')">KPIs</a>
@@ -1313,28 +1341,31 @@
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
+            const btn = document.getElementById('hamburger');
             navLinks.classList.toggle('open');
+            btn.classList.toggle('open');
         }
 
         function switchTab(event, tabName) {
             event.preventDefault();
-            
+
             const tabContents = document.querySelectorAll('.tab-content');
             const tabs = document.querySelectorAll('.tab');
-            
+
             tabContents.forEach(content => {
                 content.classList.remove('active');
             });
-            
+
             tabs.forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
 
             // Cerrar menú móvil si está abierto
             document.getElementById('navLinks').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
         }
 
         function scrollToContact() {
