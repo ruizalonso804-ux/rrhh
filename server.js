@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Ruta para la página del puesto
+app.get('/gerente-marketing', (req, res) => {
+    res.sendFile(path.join(__dirname, 'gerente-marketing.html'));
+});
+
 // Ruta para descargar información (simulado)
 app.get('/api/descargar-informacion', (req, res) => {
     res.json({

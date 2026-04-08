@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerente de Marketing Estratégico | Zonda Tech Chile</title>
+    <title>Portal de Empleo | Zonda Tech Chile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -22,1253 +17,812 @@
             background-color: #f9f9f9;
         }
 
+        /* ── NAVBAR ── */
         .navbar {
             background: linear-gradient(to right, #1B5E4C, #2D8B7A);
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .navbar-logo {
-            font-weight: 700;
-            font-size: 20px;
-            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .nav-links {
+        .navbar-logo img {
+            height: 56px;
+            width: auto;
+        }
+
+        .navbar-logo span {
+            font-family: 'Rajdhani', 'Impact', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            line-height: 1;
+        }
+
+        .navbar-right {
             display: flex;
+            align-items: center;
             gap: 2rem;
         }
 
-        .nav-links a {
-            color: white;
+        .navbar-right a {
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
             font-size: 14px;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
             font-weight: 500;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
+        .navbar-right a:hover { color: white; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
+        /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, #1B5E4C 0%, #2D8B7A 100%);
+            background: linear-gradient(135deg, #0d3d30 0%, #1B5E4C 50%, #2D8B7A 100%);
             color: white;
-            padding: 4rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 3rem;
+            padding: 5rem 2rem 4rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 320px; height: 320px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -40px;
+            width: 260px; height: 260px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(95,201,160,0.25);
+            border: 1px solid rgba(95,201,160,0.5);
+            color: #A8EDD4;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
-            font-size: 36px;
-            margin-bottom: 1rem;
+            font-size: 42px;
             font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .hero p {
             font-size: 18px;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            opacity: 0.9;
+            max-width: 620px;
+            margin: 0 auto 2.5rem;
         }
 
-        .hero-buttons {
+        .hero-stats {
             display: flex;
-            gap: 1rem;
             justify-content: center;
+            gap: 3rem;
             flex-wrap: wrap;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.15);
         }
 
-        .btn-primary {
-            background: #5FC9A0;
-            color: #0A2F29;
-            padding: 14px 32px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 15px;
-            transition: background 0.3s ease;
+        .hero-stat-item { text-align: center; }
+
+        .hero-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #5FC9A0;
         }
 
-        .btn-primary:hover {
-            background: #7FD8BE;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 12px 30px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
-        }
-
-        .highlight-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .highlight-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 0.5px solid #ddd;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .highlight-label {
+        .hero-stat-label {
             font-size: 12px;
-            color: #888;
+            opacity: 0.75;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            margin-top: 2px;
         }
 
-        .highlight-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1B5E4C;
-            margin: 0.5rem 0;
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .highlight-subtitle {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 0;
-            margin-bottom: 0;
-            border-bottom: 2px solid #ddd;
-            overflow-x: auto;
-        }
-
-        .tab {
-            padding: 14px 24px;
-            cursor: pointer;
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
-            color: #666;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .tab:hover {
-            color: #1B5E4C;
-        }
-
-        .tab.active {
-            border-bottom-color: #1B5E4C;
-            color: #1B5E4C;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ── SECCIÓN GENÉRICA ── */
         .section {
-            background: white;
-            border: 0.5px solid #ddd;
-            border-radius: 8px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 4rem 0;
         }
 
-        .section h2 {
-            font-size: 24px;
-            margin-bottom: 1.5rem;
-            color: #1B5E4C;
-            font-weight: 700;
-            border-bottom: 2px solid #E1F5EE;
-            padding-bottom: 1rem;
-        }
-
-        .section h3 {
-            font-size: 18px;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1B5E4C;
+        .section-label {
+            font-size: 12px;
             font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #2D8B7A;
+            margin-bottom: 0.5rem;
         }
 
-        .grid-2 {
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1B5E4C;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ── SOBRE ZONDA TECH ── */
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2.5rem;
         }
 
-        .grid-3 {
+        .about-text p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 15px;
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .about-highlight-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            border-left: 4px solid #2D8B7A;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .about-highlight-item h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1B5E4C;
+            margin-bottom: 0.25rem;
+        }
+
+        .about-highlight-item p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ── CIFRAS ── */
+        .stats-section {
+            background: linear-gradient(135deg, #1B5E4C 0%, #2D8B7A 100%);
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {}
+
+        .stat-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: #5FC9A0;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+
+        /* ── VALORES ── */
+        .values-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
         }
 
-        .card {
-            background: #F5F8F6;
-            border-radius: 8px;
-            padding: 1.5rem;
-            border-left: 4px solid #2D8B7A;
-            transition: all 0.3s ease;
+        .value-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.75rem;
+            border: 1px solid #e8e8e8;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .card:hover {
-            background: #E1F5EE;
-            transform: translateX(4px);
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
-        .card h3 {
+        .value-icon {
+            font-size: 32px;
+            margin-bottom: 1rem;
+        }
+
+        .value-card h4 {
             font-size: 16px;
-            margin-bottom: 0.75rem;
-            color: #1B5E4C;
             font-weight: 600;
+            color: #1B5E4C;
+            margin-bottom: 0.5rem;
         }
 
-        .card p {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .badge-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #E1F5EE;
-            color: #0F6E56;
-            padding: 7px 14px;
-            border-radius: 20px;
+        .value-card p {
             font-size: 13px;
-            font-weight: 500;
-            border: 0.5px solid #9FE1CB;
-        }
-
-        .requirement {
-            margin-bottom: 1.5rem;
-        }
-
-        .requirement h4 {
-            font-size: 15px;
-            margin-bottom: 0.75rem;
-            color: #1B5E4C;
-            font-weight: 600;
-        }
-
-        .requirement ul {
-            margin-left: 1.5rem;
-        }
-
-        .requirement li {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 1rem 0;
-        }
-
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 2.5rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            width: 14px;
-            height: 14px;
-            background: #2D8B7A;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #2D8B7A;
-        }
-
-        .timeline-item h4 {
-            font-size: 15px;
-            margin-bottom: 0.5rem;
-            color: #1B5E4C;
-            font-weight: 600;
-        }
-
-        .timeline-item p {
-            font-size: 14px;
             color: #666;
             line-height: 1.6;
         }
 
-        .timeline-item ul {
-            margin-top: 0.75rem;
-            margin-left: 1rem;
+        /* ── BENEFICIOS ── */
+        .benefits-section {
+            background: #F5F8F6;
+            padding: 4rem 0;
         }
 
-        .timeline-item li {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 2.5rem;
         }
 
-        .benefit-item {
+        .benefit-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
             align-items: flex-start;
+            gap: 1rem;
+            border: 1px solid #e8e8e8;
         }
 
         .benefit-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: #E1F5EE;
-            border-radius: 50%;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0F6E56;
-            font-weight: 700;
             font-size: 20px;
             flex-shrink: 0;
         }
 
         .benefit-text h4 {
-            font-size: 15px;
-            margin-bottom: 0.25rem;
-            color: #1B5E4C;
+            font-size: 14px;
             font-weight: 600;
+            color: #1B5E4C;
+            margin-bottom: 0.25rem;
         }
 
         .benefit-text p {
             font-size: 13px;
             color: #666;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+        /* ── PUESTOS DISPONIBLES ── */
+        .jobs-section {
+            padding: 4rem 0 5rem;
+        }
+
+        .jobs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .kpi-card {
-            background: #F5F8F6;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 0.5px solid #ddd;
-        }
-
-        .kpi-card h4 {
+        .jobs-count {
             font-size: 14px;
-            margin-bottom: 0.75rem;
-            color: #1B5E4C;
-            font-weight: 600;
-        }
-
-        .kpi-value {
-            font-size: 26px;
-            font-weight: 700;
-            color: #2D8B7A;
-            margin: 0.5rem 0;
-        }
-
-        .kpi-label {
-            font-size: 12px;
             color: #888;
-            text-transform: uppercase;
+            font-weight: 500;
         }
 
-        .salary-highlight {
-            background: #E1F5EE;
-            border-radius: 8px;
+        .jobs-count span {
+            color: #2D8B7A;
+            font-weight: 700;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
             padding: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            border: 2px solid #9FE1CB;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease;
+            margin-bottom: 1rem;
         }
 
-        .salary-label {
-            color: #0F6E56;
-            font-size: 13px;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
+        .job-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+            border-color: #2D8B7A;
         }
 
-        .salary-value {
-            font-size: 36px;
+        .job-title {
+            font-size: 20px;
             font-weight: 700;
             color: #1B5E4C;
             margin-bottom: 0.5rem;
         }
 
-        .salary-note {
-            color: #555;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .cta-section {
-            background: linear-gradient(135deg, #1B5E4C 0%, #2D8B7A 100%);
-            color: white;
-            padding: 4rem 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin: 3rem 0;
-        }
-
-        .cta-section h2 {
-            color: white;
-            font-size: 32px;
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
             margin-bottom: 1rem;
-            font-weight: 700;
         }
 
-        .cta-section p {
-            font-size: 16px;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: #666;
         }
 
-        .contact-info {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
+        .job-meta-item svg {
+            color: #2D8B7A;
+            flex-shrink: 0;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tag-area {
+            background: #E1F5EE;
+            color: #0F6E56;
+            border: 1px solid #9FE1CB;
+        }
+
+        .tag-modality {
+            background: #EEF2FF;
+            color: #3730A3;
+            border: 1px solid #C7D2FE;
+        }
+
+        .tag-internal {
+            background: #FFF7ED;
+            color: #C2410C;
+            border: 1px solid #FED7AA;
+        }
+
+        .job-date {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 0.5rem;
+        }
+
+        .job-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+        }
+
+        .btn-ver {
+            background: linear-gradient(135deg, #1B5E4C, #2D8B7A);
+            color: white;
+            padding: 12px 28px;
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-info p {
+            font-weight: 600;
             font-size: 14px;
-            margin: 0.5rem 0;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            white-space: nowrap;
         }
 
-        .contact-email {
+        .btn-ver:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .job-status {
+            font-size: 12px;
+            color: #16A34A;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .job-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #16A34A;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ── CTA BOTTOM ── */
+        .cta-bottom {
+            background: linear-gradient(135deg, #0d3d30 0%, #1B5E4C 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-bottom h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-bottom p {
+            font-size: 16px;
+            opacity: 0.85;
+            max-width: 520px;
+            margin: 0 auto 1.75rem;
+        }
+
+        .cta-email {
             font-size: 18px;
             font-weight: 600;
-            margin: 1rem 0;
+            color: #5FC9A0;
         }
 
+        /* ── FOOTER ── */
         footer {
-            background: #1B5E4C;
-            color: white;
+            background: #0d2e24;
+            color: rgba(255,255,255,0.6);
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            padding: 1.75rem 2rem;
         }
 
         footer p {
-            margin: 0.5rem 0;
             font-size: 13px;
+            margin: 0.3rem 0;
         }
 
-        @media (max-width: 1024px) {
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-
-            .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* ── DIVIDER ── */
+        .divider {
+            height: 1px;
+            background: #e8e8e8;
+            margin: 0;
         }
 
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 4px;
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                gap: 0;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: linear-gradient(to right, #1B5E4C, #2D8B7A);
-                padding: 1rem 1.5rem;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                z-index: 99;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 10px 0;
-                font-size: 15px;
-                border-bottom: 1px solid rgba(255,255,255,0.15);
-            }
-
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-
-            .navbar {
-                position: sticky;
-                top: 0;
-            }
-
-            .hero {
-                padding: 2.5rem 1.5rem;
-                border-radius: 8px;
-            }
-
-            .hero h1 {
-                font-size: 22px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                text-align: center;
-            }
-
-            .section {
-                padding: 1.25rem;
-            }
-
-            .tabs {
-                gap: 0;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .tab {
-                padding: 10px 14px;
-                font-size: 12px;
-                white-space: nowrap;
-            }
-
-            .highlight-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .kpi-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-section {
-                padding: 2rem 1.25rem;
-                border-radius: 8px;
-            }
-
-            .cta-section h2 {
-                font-size: 22px;
-            }
-
-            .benefit-item {
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-
-            .container {
-                padding: 1.5rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .highlight-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .highlight-value {
-                font-size: 22px;
-            }
-        }
-
-        .about-company {
-            background: #F5F8F6;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid #2D8B7A;
-        }
-
-        .about-company h3 {
-            color: #1B5E4C;
-            margin-bottom: 1rem;
-        }
-
-        .about-company p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 0.75rem;
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 28px; }
+            .hero p { font-size: 15px; }
+            .hero-stats { gap: 1.5rem; }
+            .hero-stat-value { font-size: 24px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .job-card { grid-template-columns: 1fr; }
+            .job-actions { align-items: flex-start; }
+            .btn-ver { width: 100%; text-align: center; }
+            .navbar-logo span { font-size: 20px; }
+            .navbar-logo img { height: 44px; }
+            .navbar-right { display: none; }
+            .section-title { font-size: 24px; }
         }
     </style>
 </head>
 <body>
+
     <!-- NAVBAR -->
-    <div class="navbar">
-        <div class="navbar-logo">🚀 Zonda Tech Chile</div>
-        <div class="hamburger" onclick="toggleMenu()" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="navbar">
+        <a href="/" class="navbar-logo">
+            <img src="logo_zonda_tech.png" alt="Zonda Tech Chile">
+            <span>Zonda Tech Chile</span>
+        </a>
+        <div class="navbar-right">
+            <a href="#sobre-nosotros">Sobre Nosotros</a>
+            <a href="#puestos">Puestos Disponibles</a>
+            <a href="#contacto">Contacto</a>
         </div>
-        <div class="nav-links" id="navLinks">
-            <a onclick="switchTab(event, 'posicion')">Posición</a>
-            <a onclick="switchTab(event, 'requisitos')">Requisitos</a>
-            <a onclick="switchTab(event, 'kpis')">KPIs</a>
-            <a onclick="switchTab(event, 'proceso')">Proceso</a>
-            <a onclick="switchTab(event, 'empresa')">Empresa</a>
-        </div>
-    </div>
+    </nav>
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <div class="container">
-        <!-- HERO SECTION -->
-        <div class="hero">
-            <h1>Gerente de Marketing Estratégico</h1>
-            <p>Lídera la transformación digital y expansión internacional de una empresa tecnológica en crecimiento exponencial</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="scrollToContact()">Aplicar Ahora</button>
-                <button class="btn-secondary" onclick="downloadInfo()">Descargar Información</button>
-            </div>
-        </div>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Portal Interno de Empleo</div>
+            <h1>Crece con Zonda Tech Chile</h1>
+            <p>Explora las oportunidades de carrera disponibles y sé parte del equipo que está transformando la tecnología en Latinoamérica.</p>
 
-        <!-- TARJETAS DESTACADAS -->
-        <div class="highlight-grid">
-            <div class="highlight-card">
-                <div class="highlight-label">Tipo de Contrato</div>
-                <div class="highlight-value">Indefinido</div>
-                <div class="highlight-subtitle">Tiempo Completo</div>
-            </div>
-            <div class="highlight-card">
-                <div class="highlight-label">Ubicación</div>
-                <div class="highlight-value">Santiago</div>
-                <div class="highlight-subtitle">Modalidad Híbrida</div>
-            </div>
-            <div class="highlight-card">
-                <div class="highlight-label">Reporta a</div>
-                <div class="highlight-value">CEO</div>
-                <div class="highlight-subtitle">Dirección Ejecutiva</div>
-            </div>
-        </div>
-
-        <!-- TABS DE NAVEGACIÓN -->
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab(event, 'posicion')">Posición</div>
-            <div class="tab" onclick="switchTab(event, 'requisitos')">Requisitos</div>
-            <div class="tab" onclick="switchTab(event, 'kpis')">KPIs</div>
-            <div class="tab" onclick="switchTab(event, 'proceso')">Proceso</div>
-            <div class="tab" onclick="switchTab(event, 'empresa')">Empresa</div>
-        </div>
-
-        <!-- TAB 1: POSICIÓN -->
-        <div id="posicion" class="tab-content active">
-            <div class="section">
-                <h2>Sobre la Posición</h2>
-                <div class="about-company">
-                    <h3>Propósito Principal</h3>
-                    <p>Diseñar, implementar y liderar la estrategia global de marketing de la empresa para aumentar la participación de mercado, fortalecer el posicionamiento de marca en el sector tecnológico y asegurar el cumplimiento de metas de ventas, garantizando una transición exitosa hacia la expansión internacional a Latinoamérica.</p>
+            <div class="hero-stats">
+                <div class="hero-stat-item">
+                    <div class="hero-stat-value">+5</div>
+                    <div class="hero-stat-label">Años en el mercado</div>
                 </div>
-
-                <h3>Información Clave</h3>
-                <div class="grid-2">
-                    <div class="card">
-                        <h3>Reporta a</h3>
-                        <p><strong>Gerente General (CEO)</strong></p>
-                        <p style="margin-top: 0.5rem; font-size: 12px;">Participación en decisiones estratégicas de la empresa</p>
-                    </div>
-                    <div class="card">
-                        <h3>Equipo a Cargo</h3>
-                        <p><strong>4 Profesionales:</strong></p>
-                        <ul style="margin-top: 0.5rem; margin-left: 1rem; font-size: 13px;">
-                            <li>Diseñador Gráfico</li>
-                            <li>Community Manager</li>
-                            <li>Analista de Datos</li>
-                            <li>Especialista SEO/SEM</li>
-                        </ul>
-                    </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-value">4</div>
+                    <div class="hero-stat-label">Países LATAM</div>
                 </div>
-            </div>
-
-            <div class="section">
-                <h2>Responsabilidades Principales</h2>
-                <div class="grid-2">
-                    <div>
-                        <div class="requirement">
-                            <h4>Gestión Estratégica</h4>
-                            <ul>
-                                <li>Elaborar y gestionar presupuesto anual (~$9M USD)</li>
-                                <li>Diseñar campañas de lanzamiento para nuevos productos</li>
-                                <li>Análisis constante de competencia y tendencias</li>
-                                <li>Optimizar ROI de todas las inversiones de marketing</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="requirement">
-                            <h4>Liderazgo y Alianzas</h4>
-                            <ul>
-                                <li>Liderar equipo de 4 profesionales de marketing</li>
-                                <li>Establecer alianzas con influencers y marcas</li>
-                                <li>Coordinar con distribuidores retail</li>
-                                <li>Definir y monitorear KPIs corporativos</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-value">CAGR 18%</div>
+                    <div class="hero-stat-label">Crecimiento anual</div>
                 </div>
-                <div class="requirement" style="margin-top: 1.5rem;">
-                    <h4>Expansión Internacional</h4>
-                    <ul>
-                        <li>Desarrollar estrategia de penetración en mercados LATAM</li>
-                        <li>Coordinar entrada a nuevos países (México, Colombia, Perú, Argentina)</li>
-                        <li>Adaptación de messaging y positioning regional</li>
-                        <li>Gestión de presupuesto para operaciones internacionales</li>
-                    </ul>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-value">450M</div>
+                    <div class="hero-stat-label">Mercado potencial</div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- TAB 2: REQUISITOS -->
-        <div id="requisitos" class="tab-content">
-            <div class="section">
-                <h2>Requisitos Obligatorios</h2>
+    <!-- SOBRE NOSOTROS -->
+    <section class="section" id="sobre-nosotros">
+        <div class="container">
+            <div class="section-label">Quiénes somos</div>
+            <div class="section-title">Tecnología chilena con visión global</div>
+            <p class="section-subtitle">Conoce la empresa detrás de las oportunidades y por qué Zonda Tech es un lugar donde tu carrera puede crecer.</p>
 
-                <h3>Formación Académica</h3>
-                <div class="grid-2">
-                    <div class="requirement">
-                        <h4>Título Profesional Requerido</h4>
-                        <ul>
-                            <li>Ingeniería Comercial</li>
-                            <li>Ingeniería de Ejecución en Marketing</li>
-                            <li>Publicidad</li>
-                            <li>Marketing o carrera afín</li>
-                        </ul>
-                    </div>
-                    <div class="requirement">
-                        <h4>Formación Deseable</h4>
-                        <ul>
-                            <li>Diplomado en Marketing Digital</li>
-                            <li>Magíster en Marketing</li>
-                            <li>Diplomado en Dirección de Marketing</li>
-                            <li>Diplomado en Estrategia de Negocios</li>
-                        </ul>
-                    </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Zonda Tech Chile es una empresa nacional especializada en el diseño, desarrollo y comercialización de <strong>dispositivos inteligentes, accesorios tecnológicos y periféricos gaming</strong> de alta calidad.</p>
+                    <p>Nacimos con la convicción de que la tecnología de punta no debía ser exclusiva de grandes mercados. Hoy operamos desde Santiago con una visión clara de expansión hacia México, Colombia, Perú y Argentina.</p>
+                    <p>Nuestro equipo combina talento local con mentalidad global: somos ágiles, orientados a datos y apasionados por la innovación. Cada producto que lanzamos al mercado lleva el sello de quienes trabajan aquí.</p>
                 </div>
-
-                <h3 style="margin-top: 2rem;">Experiencia Requerida</h3>
-                <div class="grid-2">
-                    <div class="requirement">
-                        <h4>Años de Experiencia</h4>
-                        <ul>
-                            <li><strong>Mínimo 7 años</strong> en marketing estratégico</li>
-                            <li><strong>Mínimo 2 años</strong> liderando equipos</li>
-                            <li>Experiencia comprobada en empresas de tecnología o consumer goods</li>
-                            <li>Preferentemente en startups o empresas de rápido crecimiento</li>
-                        </ul>
-                    </div>
-                    <div class="requirement">
-                        <h4>Preferencias Adicionales</h4>
-                        <ul>
-                            <li>Experiencia en segmento gaming o tech</li>
-                            <li>Conocimiento de mercado LATAM</li>
-                            <li>Experiencia en expansión internacional</li>
-                            <li>Exitoso track record en campañas digitales</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>Competencias Técnicas (Hard Skills)</h2>
-                <p style="margin-bottom: 1.5rem; color: #555;">Herramientas y metodologías que debes dominar:</p>
-
-                <div class="grid-2">
-                    <div class="requirement">
-                        <h4>Analytics y Business Intelligence</h4>
-                        <ul>
-                            <li>Google Analytics (GA4)</li>
-                            <li>Business Intelligence Tools (Power BI, Tableau, Looker)</li>
-                            <li>Análisis estadístico básico</li>
-                            <li>Simulación de modelos de negocio</li>
-                        </ul>
-                    </div>
-                    <div class="requirement">
-                        <h4>Marketing Digital</h4>
-                        <ul>
-                            <li>SEO (posicionamiento en buscadores)</li>
-                            <li>SEM (Google Ads, campañas pagadas)</li>
-                            <li>Inbound Marketing y Lead Generation</li>
-                            <li>Email Marketing y Marketing Automation</li>
-                        </ul>
-                    </div>
-                    <div class="requirement">
-                        <h4>Social Media y Content</h4>
-                        <ul>
-                            <li>Meta Ads (Facebook e Instagram)</li>
-                            <li>LinkedIn Ads</li>
-                            <li>Content Marketing</li>
-                            <li>Gestión de comunidades digitales</li>
-                        </ul>
-                    </div>
-                    <div class="requirement">
-                        <h4>Marketing Tradicional y Finanzas</h4>
-                        <ul>
-                            <li>Trade Marketing</li>
-                            <li>Retail Marketing</li>
-                            <li>Gestión de presupuestos</li>
-                            <li>Análisis de ROI y ROAS</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Idioma</h3>
-                <div class="card">
-                    <h3>Inglés Nivel Avanzado - INDISPENSABLE</h3>
-                    <p>Requerido para la proyección internacional de la empresa. Debes ser capaz de participar en reuniones, redactar reportes y presentar estrategias en inglés con fluidez.</p>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Conocimientos en Herramientas</h3>
-                <div class="badge-group">
-                    <span class="badge">Google Analytics</span>
-                    <span class="badge">Business Intelligence</span>
-                    <span class="badge">SEO / SEM</span>
-                    <span class="badge">Inbound Marketing</span>
-                    <span class="badge">Email Marketing</span>
-                    <span class="badge">Meta Ads</span>
-                    <span class="badge">LinkedIn Ads</span>
-                    <span class="badge">Content Marketing</span>
-                    <span class="badge">CRM</span>
-                    <span class="badge">Marketing Automation</span>
-                    <span class="badge">Excel Avanzado</span>
-                    <span class="badge">Data Visualization</span>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>Habilidades Personales (Soft Skills)</h2>
-                <p style="margin-bottom: 1.5rem; color: #555;">Competencias clave que hacen la diferencia:</p>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <h3>Liderazgo</h3>
-                        <p>Inspirar y guiar equipos multidisciplinarios hacia objetivos comunes. Capacidad para motivar, desarrollar talento y crear una cultura de excelencia.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Visión Estratégica</h3>
-                        <p>Ver el panorama completo del negocio, no solo tácticas del día a día. Capacidad para definir roadmaps y ejecutar planes a largo plazo.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Adaptabilidad</h3>
-                        <p>Pivotar rápidamente ante cambios del mercado tech. Resiliencia para manejar ambigüedad y cambio constante.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Comunicación y Persuasión</h3>
-                        <p>Negociar presupuestos con directorio. Convencer en mensajería de marca y persuadir stakeholders clave.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Pensamiento Analítico</h3>
-                        <p>Tomar decisiones basadas en datos, no en intuición. Problem solving estructurado y pensamiento crítico.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Orientación a Resultados</h3>
-                        <p>Obsesión por cumplir y superar metas. Responsabilidad personal por resultados entregables y medibles.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 3: KPIs -->
-        <div id="kpis" class="tab-content">
-            <div class="section">
-                <h2>Objetivos y Indicadores Clave de Desempeño</h2>
-                <p style="margin-bottom: 2rem; color: #555; font-size: 15px;">Tu desempeño será evaluado en base a estos 6 KPIs corporativos. Cada uno tiene una meta específica para 2026:</p>
-
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <h4>ROI Marketing</h4>
-                        <div class="kpi-value">+45%</div>
-                        <div class="kpi-label">Meta Anual</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Retorno sobre inversión en todas las campañas</p>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>CAC (Costo por Cliente)</h4>
-                        <div class="kpi-value">-20%</div>
-                        <div class="kpi-label">vs 2024</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Reducción de costo de adquisición</p>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Brand Awareness</h4>
-                        <div class="kpi-value">+60%</div>
-                        <div class="kpi-label">Target LATAM</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Conocimiento de marca en región</p>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Market Share</h4>
-                        <div class="kpi-value">+15%</div>
-                        <div class="kpi-label">Segmento Tech</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Participación en mercado de tecnología</p>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Conversion Rate</h4>
-                        <div class="kpi-value">+35%</div>
-                        <div class="kpi-label">Digital</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Tasa de conversión en canales digitales</p>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Customer Retention</h4>
-                        <div class="kpi-value">+25%</div>
-                        <div class="kpi-label">Año 1</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem;">Retención de clientes existentes</p>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 2rem;">
-                    <h3>Bonificación por Desempeño</h3>
-                    <p>Tu compensación variable estará directamente ligada al cumplimiento de estos KPIs:</p>
-                    <ul style="margin-top: 1rem; margin-left: 1.5rem;">
-                        <li><strong>100% cumplimiento:</strong> Bonificación máxima del 30% anual</li>
-                        <li><strong>80-99% cumplimiento:</strong> Bonificación del 20-29%</li>
-                        <li><strong>60-79% cumplimiento:</strong> Bonificación del 10-19%</li>
-                        <li><strong>Menos del 60%:</strong> No hay bonificación variable</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 5: PROCESO -->
-        <div id="proceso" class="tab-content">
-            <div class="section">
-                <h2>Plan de Primeros 100 Días</h2>
-                <p style="margin-bottom: 2rem; color: #555;">Tu primer trimestre será estructurado en 3 fases estratégicas:</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Fase 1: Diagnóstico e Integración (Días 1-30)</h4>
-                        <p><strong>Objetivo:</strong> Entender el estado actual y alinearte con la organización.</p>
-                        <ul>
-                            <li>Auditoría completa del estado actual del marketing</li>
-                            <li>Alineación estratégica con CEO y directivos clave</li>
-                            <li>Conocimiento profundo de productos y portafolio</li>
-                            <li>Análisis de competencia y posicionamiento actual</li>
-                            <li>Evaluación del equipo de marketing</li>
-                        </ul>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Fase 2: Estrategia y Planificación (Días 31-65)</h4>
-                        <p><strong>Objetivo:</strong> Definir dirección y crear blueprint para ejecución.</p>
-                        <ul>
-                            <li>Elaboración del Plan de Marketing 2026 completo</li>
-                            <li>Definición detallada de KPIs y métricas</li>
-                            <li>Roadmap digital e identificación de canales prioritarios</li>
-                            <li>Propuesta de alianzas estratégicas (influencers, marcas, distribuidores)</li>
-                            <li>Presupuesto detallado por canal y campaña</li>
-                        </ul>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Fase 3: Ejecución Inicial (Días 66-100)</h4>
-                        <p><strong>Objetivo:</strong> Demostrar capacidad y generar primeros resultados.</p>
-                        <ul>
-                            <li>Lanzamiento de primeras campañas de marketing</li>
-                            <li>Implementación de quick wins identificados</li>
-                            <li>Establecimiento de alianzas prioritarias</li>
-                            <li>Primer reporte de resultados y learnings al CEO</li>
-                            <li>Ajustes de estrategia basados en feedback inicial</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>Proceso de Selección</h2>
-                <p style="margin-bottom: 2rem; color: #555;">Proceso riguroso y estructurado para asegurar el mejor fit:</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Etapa 1: Revisión de Candidatura (5 días)</h4>
-                        <p>Análisis de CV, carta de presentación y portfolio de campañas exitosas.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Etapa 2: Entrevista Telefónica (30 minutos)</h4>
-                        <p>Screening inicial con equipo de Recursos Humanos. Enfoque en experiencia, motivación y soft skills.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Etapa 3: Entrevista con CEO (60 minutos)</h4>
-                        <p>Conversación estratégica con Gerente General sobre visión, plan de marketing 2026 y liderazgo.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Etapa 4: Presentación Práctica (120 minutos)</h4>
-                        <p>Test de aptitud o caso práctico de marketing. Presentación de estrategia ficticia para cliente o producto.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <h4>Etapa 5: Entrevista Final (45 minutos)</h4>
-                        <p>Conversación con directorio. Evaluación de visión global y fit cultural.</p>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 2rem; background: #E1F5EE;">
-                    <h3>Duración Estimada: 3 a 4 semanas</h3>
-                    <p>Proceso ágil pero riguroso para identificar el candidato ideal. Valoramos tanto competencias técnicas como potencial cultural.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 6: EMPRESA -->
-        <div id="empresa" class="tab-content">
-            <div class="section">
-                <h2>Sobre Zonda Tech Chile</h2>
-                <div class="about-company">
-                    <h3>¿Quiénes Somos?</h3>
-                    <p>Zonda Tech Chile es una empresa nacional en <strong>rápido crecimiento</strong> especializada en diseño, desarrollo y comercialización de dispositivos inteligentes, accesorios tecnológicos y periféricos gaming de alta calidad.</p>
-                    <p>Con presencia consolidada en Chile, nos posicionamos como <strong>líderes en innovación</strong> en el segmento de tecnología y consumo masivo.</p>
-                </div>
-
-                <h3>Nuestra Misión y Visión</h3>
-                <div class="grid-2">
-                    <div class="card">
-                        <h3>Misión</h3>
+                <div class="about-highlights">
+                    <div class="about-highlight-item">
+                        <h4>Misión</h4>
                         <p>Crear soluciones tecnológicas innovadoras que potencien la experiencia digital de nuestros clientes, combinando diseño, calidad y accesibilidad.</p>
                     </div>
-                    <div class="card">
-                        <h3>Visión</h3>
+                    <div class="about-highlight-item">
+                        <h4>Visión</h4>
                         <p>Ser el referente en tecnología, accesorios y gaming en Latinoamérica en los próximos 2 años, consolidando una presencia regional fuerte y reconocible.</p>
                     </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Nuestros Números</h3>
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>Mercado Objetivo</h3>
-                        <div style="font-size: 20px; font-weight: 700; color: #2D8B7A; margin: 0.75rem 0;">450M personas</div>
-                        <p style="font-size: 12px; color: #666;">Población de Latinoamérica</p>
+                    <div class="about-highlight-item">
+                        <h4>Industria</h4>
+                        <p>Tecnología de consumo, periféricos gaming y dispositivos inteligentes (IoT). Segmento de mayor crecimiento en LATAM con +25% anual en gaming.</p>
                     </div>
-                    <div class="card">
-                        <h3>Crecimiento Tech</h3>
-                        <div style="font-size: 20px; font-weight: 700; color: #2D8B7A; margin: 0.75rem 0;">CAGR 18%</div>
-                        <p style="font-size: 12px; color: #666;">2024-2026 proyectado</p>
-                    </div>
-                    <div class="card">
-                        <h3>Segmento Gaming</h3>
-                        <div style="font-size: 20px; font-weight: 700; color: #2D8B7A; margin: 0.75rem 0;">+25% anual</div>
-                        <p style="font-size: 12px; color: #666;">Crecimiento proyectado</p>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">¿Por qué Zonda Tech?</h3>
-                <div class="grid-2">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">📈</div>
-                        <div class="benefit-text">
-                            <h4>Crecimiento Exponencial</h4>
-                            <p>Empresa en expansión acelerada operando en el segmento más dinámico del mercado chileno.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🌎</div>
-                        <div class="benefit-text">
-                            <h4>Expansión Internacional</h4>
-                            <p>Estrategia clara de penetración a Latinoamérica. Serás pieza clave en este crecimiento regional.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">👥</div>
-                        <div class="benefit-text">
-                            <h4>Equipo Joven y Ágil</h4>
-                            <p>Profesionales motivados, talentosos y comprometidos con la visión de la empresa.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">💡</div>
-                        <div class="benefit-text">
-                            <h4>Innovación como ADN</h4>
-                            <p>La creatividad y el pensamiento disruptivo son valorados y recompensados constantemente.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🎯</div>
-                        <div class="benefit-text">
-                            <h4>Impacto Inmediato</h4>
-                            <p>Tu estrategia definirá el rumbo de la empresa en los próximos 2-3 años.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">📊</div>
-                        <div class="benefit-text">
-                            <h4>Data-Driven Culture</h4>
-                            <p>Decisiones basadas en datos e insights. Ambiente que valora el análisis profundo.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 2rem;">Línea de Productos</h3>
-                <div class="requirement">
-                    <h4>Portafolio Actual</h4>
-                    <ul>
-                        <li>Dispositivos inteligentes para hogar y oficina</li>
-                        <li>Accesorios tecnológicos de marca premium</li>
-                        <li>Periféricos gaming de alta performance</li>
-                        <li>Soluciones de conectividad y smart devices</li>
-                    </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- CTA FINAL -->
-    <div class="container">
-        <div class="cta-section">
-            <h2>¿Listo para Liderar el Cambio?</h2>
-            <p>Únete a Zonda Tech Chile y sé parte de la transformación digital del sector tecnológico en Latinoamérica. Serás responsable de estrategias que impactarán a millones de usuarios.</p>
-            <button class="btn-primary" onclick="scrollToContact()">Aplicar Ahora</button>
-            
-            <div class="contact-info" id="contact">
-                <p style="color: white; font-size: 15px; margin-bottom: 1rem;">CONTACTO Y POSTULACIÓN</p>
-                <div class="contact-email">reclutamiento@zondatech.cl</div>
-                <p>Sitio web: www.zondatech.cl</p>
-                <p style="margin-top: 1.5rem; font-size: 13px; opacity: 0.85;">Documentos requeridos para postular:</p>
-                <ul style="text-align: left; display: inline-block; margin-top: 0.5rem; font-size: 13px;">
-                    <li>CV actualizado (máximo 2 páginas)</li>
-                    <li>Carta de presentación personalizada</li>
-                    <li>Portfolio de campañas exitosas (deseable)</li>
-                    <li>Referencias de empleadores anteriores</li>
-                </ul>
+    <div class="divider"></div>
+
+    <!-- CIFRAS -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">$9M</div>
+                    <div class="stat-label">Presupuesto anual de marketing</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">+30%</div>
+                    <div class="stat-label">ROI objetivo en campañas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">+60%</div>
+                    <div class="stat-label">Meta de crecimiento en Brand Awareness LATAM</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">+25%</div>
+                    <div class="stat-label">Crecimiento del segmento gaming proyectado</div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- VALORES -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Nuestra cultura</div>
+            <div class="section-title">Lo que nos define como equipo</div>
+            <p class="section-subtitle">Valores que guían cada decisión, cada producto y cada contratación que hacemos.</p>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h4>Innovación constante</h4>
+                    <p>Cuestionamos el statu quo. Buscamos activamente nuevas formas de hacer las cosas y premiamos las ideas que generan impacto.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📊</div>
+                    <h4>Decisiones basadas en datos</h4>
+                    <p>La intuición suma, pero los datos deciden. Construimos una cultura donde las métricas son el lenguaje común.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h4>Colaboración sin ego</h4>
+                    <p>Los mejores resultados vienen de equipos que comparten conocimiento, se apoyan y celebran los logros colectivos.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h4>Orientación a resultados</h4>
+                    <p>Nos importa el impacto, no las horas. Medimos el éxito en objetivos cumplidos y valor entregado al cliente.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌎</div>
+                    <h4>Visión latinoamericana</h4>
+                    <p>Pensamos en grande desde Chile. Nuestra ambición es construir una marca que resuene en toda la región.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌱</div>
+                    <h4>Desarrollo del talento</h4>
+                    <p>Invertimos en el crecimiento de nuestro equipo. Tu desarrollo profesional es parte de nuestra estrategia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-label">¿Por qué Zonda Tech?</div>
+            <div class="section-title">Beneficios de ser parte del equipo</div>
+            <p class="section-subtitle">Más allá del sueldo, ofrecemos un ambiente donde puedes desarrollarte y tener impacto real.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💻</div>
+                    <div class="benefit-text">
+                        <h4>Modalidad híbrida</h4>
+                        <p>Flexibilidad para trabajar desde casa y oficina, con equipamiento tecnológico de primera.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-text">
+                        <h4>Bono por desempeño</h4>
+                        <p>Compensación variable atada a KPIs claros. Tu esfuerzo se traduce directamente en ingresos.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <div class="benefit-text">
+                        <h4>Presupuesto de capacitación</h4>
+                        <p>Acceso a cursos, certificaciones y conferencias del sector tech y gaming en LATAM.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌐</div>
+                    <div class="benefit-text">
+                        <h4>Exposición internacional</h4>
+                        <p>Trabajarás en proyectos con alcance regional, relacionándote con mercados de toda Latinoamérica.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏥</div>
+                    <div class="benefit-text">
+                        <h4>Beneficios de salud</h4>
+                        <p>Seguro complementario de salud para el trabajador y su grupo familiar.</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎮</div>
+                    <div class="benefit-text">
+                        <h4>Cultura gaming</h4>
+                        <p>Un ambiente de trabajo dinámico donde la pasión por la tecnología y el gaming es parte del día a día.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUESTOS DISPONIBLES -->
+    <section class="jobs-section" id="puestos">
+        <div class="container">
+            <div class="jobs-header">
+                <div>
+                    <div class="section-label">Oportunidades abiertas</div>
+                    <div class="section-title" style="margin-bottom: 0;">Puestos disponibles</div>
+                </div>
+                <div class="jobs-count"><span>1</span> puesto activo</div>
+            </div>
+
+            <!-- TARJETA DE PUESTO -->
+            <div class="job-card">
+                <div class="job-info">
+                    <div class="job-title">Gerente de Marketing Estratégico</div>
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Santiago, Chile
+                        </div>
+                        <div class="job-meta-item">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                            Tiempo completo
+                        </div>
+                        <div class="job-meta-item">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                            Reporta al CEO
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag tag-area">Marketing</span>
+                        <span class="tag tag-modality">Híbrido</span>
+                        <span class="tag tag-internal">Interna + Externa</span>
+                    </div>
+                    <div class="job-date">Publicado el 8 de abril de 2026 &nbsp;·&nbsp; Cierre estimado: 30 de abril de 2026</div>
+                </div>
+                <div class="job-actions">
+                    <div class="job-status">Activo</div>
+                    <a href="gerente-marketing.html" class="btn-ver">Ver Posición →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA CONTACTO -->
+    <section class="cta-bottom" id="contacto">
+        <div class="container">
+            <h2>¿Tienes alguna consulta?</h2>
+            <p>Si tienes preguntas sobre algún puesto o el proceso de selección, nuestro equipo de RRHH está disponible para ayudarte.</p>
+            <div class="cta-email">reclutamiento@zondatech.cl</div>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
         <p>&copy; 2026 Zonda Tech Chile. Todos los derechos reservados.</p>
-        <p>Estamos buscando talento excepcional para liderar nuestro crecimiento.</p>
-        <p style="margin-top: 1.5rem; opacity: 0.7;">Liderando la tecnología en Latinoamérica 🚀</p>
+        <p>Portal Interno de Empleo · www.zondatech.cl</p>
     </footer>
 
-    <script>
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('open');
-        }
-
-        function switchTab(event, tabName) {
-            event.preventDefault();
-            
-            const tabContents = document.querySelectorAll('.tab-content');
-            const tabs = document.querySelectorAll('.tab');
-            
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-
-            // Cerrar menú móvil si está abierto
-            document.getElementById('navLinks').classList.remove('open');
-        }
-
-        function scrollToContact() {
-            const contactSection = document.getElementById('contact');
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function downloadInfo() {
-            alert('Descarga de información disponible. En una implementación real, esto descargaría un PDF con todos los detalles de la posición.');
-        }
-    </script>
 </body>
 </html>
