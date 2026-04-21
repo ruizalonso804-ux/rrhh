@@ -772,7 +772,186 @@
                 gap: 0.5rem;
             }
         }
+        /* ── MODAL POSTULACIÓN ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+            overflow: hidden;
+            animation: modalIn 0.22s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, #1B5E4C, #2D8B7A);
+            padding: 1.4rem 1.6rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .modal-header-text h3 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .modal-header-text p {
+            color: rgba(255,255,255,0.78);
+            font-size: 13px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px;
+            transition: color 0.15s;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover { color: #fff; }
+
+        .modal-body {
+            padding: 1.6rem;
+        }
+
+        .modal-field {
+            margin-bottom: 1rem;
+        }
+
+        .modal-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .modal-field label .req {
+            color: #c0392b;
+            margin-left: 2px;
+        }
+
+        .modal-field input,
+        .modal-field textarea {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #222;
+            background: #fafafa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .modal-field input:focus,
+        .modal-field textarea:focus {
+            outline: none;
+            border-color: #2D8B7A;
+            box-shadow: 0 0 0 3px rgba(45,139,122,0.12);
+            background: #fff;
+        }
+
+        .modal-field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .field-error {
+            display: block;
+            color: #c0392b;
+            font-size: 12px;
+            margin-top: 4px;
+            min-height: 16px;
+        }
+
+        .modal-fields-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #1B5E4C, #2D8B7A);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        .modal-submit:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .modal-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .modal-feedback {
+            display: none;
+            margin-top: 0.8rem;
+            padding: 10px 13px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 500;
+        }
+
+        .modal-feedback.success {
+            display: block;
+            background: #e6f9f2;
+            color: #1B5E4C;
+            border: 1px solid #a7e6d0;
+        }
+
+        .modal-feedback.error {
+            display: block;
+            background: #fff0f0;
+            color: #c0392b;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 520px) {
+            .modal-fields-row { grid-template-columns: 1fr; }
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -803,7 +982,7 @@
             <h1>Gerente de Marketing Estratégico</h1>
             <p>Lídera la transformación digital y expansión internacional de una empresa tecnológica en crecimiento exponencial</p>
             <div class="hero-buttons">
-                <button class="btn-primary" onclick="scrollToContact()">Aplicar Ahora</button>
+                <button class="btn-primary" onclick="openApplicationModal()">Aplicar Ahora</button>
                 <button class="btn-secondary" onclick="downloadInfo()">Descargar Información</button>
             </div>
         </div>
@@ -1314,7 +1493,7 @@
         <div class="cta-section">
             <h2>¿Listo para Liderar el Cambio?</h2>
             <p>Únete a Zonda Tech Chile y sé parte de la transformación digital del sector tecnológico en Latinoamérica. Serás responsable de estrategias que impactarán a millones de usuarios.</p>
-            <button class="btn-primary" onclick="scrollToContact()">Aplicar Ahora</button>
+            <button class="btn-primary" onclick="openApplicationModal()">Aplicar Ahora</button>
             
             <div class="contact-info" id="contact">
                 <p style="color: white; font-size: 15px; margin-bottom: 1rem;">CONTACTO Y POSTULACIÓN</p>
@@ -1331,6 +1510,50 @@
         </div>
     </div>
 
+    <!-- MODAL POSTULACIÓN -->
+    <div class="modal-overlay" id="applicationModal" onclick="handleModalOverlayClick(event)">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-header-text">
+                    <h3>Postulación al cargo</h3>
+                    <p>Gerente de Marketing Estratégico · Zonda Tech Chile</p>
+                </div>
+                <button class="modal-close" onclick="closeApplicationModal()" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="applicationForm" onsubmit="submitApplication(event)">
+                    <div class="modal-fields-row">
+                        <div class="modal-field">
+                            <label>Nombre completo <span class="req">*</span></label>
+                            <input type="text" id="field-nombre" placeholder="Tu nombre" required autocomplete="name">
+                        </div>
+                        <div class="modal-field">
+                            <label>Correo electrónico <span class="req">*</span></label>
+                            <input type="email" id="field-email" placeholder="tu@email.com" required autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="modal-fields-row">
+                        <div class="modal-field">
+                            <label>Teléfono</label>
+                            <input type="tel" id="field-telefono" placeholder="+56 9 XXXX XXXX" autocomplete="tel" oninput="validarTelefonoEnVivo(this)">
+                            <span class="field-error" id="error-telefono"></span>
+                        </div>
+                        <div class="modal-field">
+                            <label>LinkedIn</label>
+                            <input type="url" id="field-linkedin" placeholder="linkedin.com/in/tu-perfil">
+                        </div>
+                    </div>
+                    <div class="modal-field">
+                        <label>¿Por qué quieres unirte a Zonda Tech?</label>
+                        <textarea id="field-mensaje" placeholder="Cuéntanos sobre tu experiencia y motivación..."></textarea>
+                    </div>
+                    <button type="submit" class="modal-submit" id="submitBtn">Enviar Postulación</button>
+                    <div class="modal-feedback" id="modalFeedback"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <p>&copy; 2026 Zonda Tech Chile. Todos los derechos reservados.</p>
@@ -1339,6 +1562,109 @@
     </footer>
 
     <script>
+        // ── EMAILJS CONFIG ──
+        emailjs.init('FxX0BVCyd_hK_Moih');
+
+        // ── SUPABASE CONFIG ──
+        // Reemplaza estos valores con los de tu proyecto en supabase.com → Settings → API
+        const SUPABASE_URL = 'https://nyhhzuoqdpsphgjqpixl.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable__p4jPlqgk6CQN97MSMqzhQ_SGEmx8t8';
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ── MODAL ──
+        function openApplicationModal() {
+            document.getElementById('applicationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeApplicationModal() {
+            document.getElementById('applicationModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('modalFeedback').className = 'modal-feedback';
+            document.getElementById('modalFeedback').textContent = '';
+            document.getElementById('applicationForm').reset();
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').textContent = 'Enviar Postulación';
+        }
+
+        function handleModalOverlayClick(e) {
+            if (e.target === document.getElementById('applicationModal')) {
+                closeApplicationModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeApplicationModal();
+        });
+
+        // ── ENVÍO A SUPABASE ──
+        function esTelefonoChileno(tel) {
+            const limpio = tel.replace(/[\s\-\(\)\.]/g, '');
+            // Acepta: +56912345678, 56912345678, 912345678 (móvil)
+            // o +562XXXXXXX, 2XXXXXXX (fijo regional)
+            return /^(\+?56)?[2-9]\d{7,8}$/.test(limpio);
+        }
+
+        function validarTelefonoEnVivo(input) {
+            const errorEl = document.getElementById('error-telefono');
+            const val = input.value.trim();
+            if (val && !esTelefonoChileno(val)) {
+                input.style.borderColor = '#c0392b';
+                errorEl.textContent = 'Ingresa un número chileno válido. Ej: +56 9 1234 5678';
+            } else {
+                input.style.borderColor = '';
+                errorEl.textContent = '';
+            }
+        }
+
+        async function submitApplication(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const feedback = document.getElementById('modalFeedback');
+
+            const nombre = document.getElementById('field-nombre').value.trim();
+            const email = document.getElementById('field-email').value.trim();
+            const telefono = document.getElementById('field-telefono').value.trim();
+            const linkedin = document.getElementById('field-linkedin').value.trim();
+            const mensaje = document.getElementById('field-mensaje').value.trim();
+
+            // Validar teléfono si fue ingresado
+            if (telefono && !esTelefonoChileno(telefono)) {
+                document.getElementById('field-telefono').style.borderColor = '#c0392b';
+                document.getElementById('error-telefono').textContent = 'Ingresa un número chileno válido. Ej: +56 9 1234 5678';
+                return;
+            }
+
+            feedback.className = 'modal-feedback';
+            feedback.textContent = '';
+
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            const { error } = await supabaseClient
+                .from('postulaciones')
+                .insert([{ nombre, email, telefono, linkedin, mensaje }]);
+
+            if (error) {
+                feedback.className = 'modal-feedback error';
+                feedback.textContent = 'Hubo un error al enviar. Por favor intenta nuevamente.';
+                btn.disabled = false;
+                btn.textContent = 'Enviar Postulación';
+            } else {
+                // Enviar email de confirmación al postulante
+                emailjs.send('service_777jlok', 'template_60p9wjb', {
+                    to_email: email,
+                    nombre: nombre,
+                });
+                feedback.className = 'modal-feedback success';
+                feedback.textContent = '¡Postulación enviada exitosamente! Revisa tu correo para la confirmación.';
+                btn.textContent = 'Enviado ✓';
+                document.getElementById('applicationForm').reset();
+            }
+        }
+
+        // ── NAVBAR ──
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             const btn = document.getElementById('hamburger');
@@ -1363,14 +1689,8 @@
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
 
-            // Cerrar menú móvil si está abierto
             document.getElementById('navLinks').classList.remove('open');
             document.getElementById('hamburger').classList.remove('open');
-        }
-
-        function scrollToContact() {
-            const contactSection = document.getElementById('contact');
-            contactSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         function downloadInfo() {
