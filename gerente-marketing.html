@@ -893,6 +893,37 @@
             min-height: 16px;
         }
 
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 13px;
+            border: 1.5px dashed #ccc;
+            border-radius: 8px;
+            background: #fafafa;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .file-upload-label:hover {
+            border-color: #2D8B7A;
+            background: #f0faf8;
+            color: #1B5E4C;
+        }
+
+        .file-upload-label.has-file {
+            border-color: #2D8B7A;
+            background: #f0faf8;
+            color: #1B5E4C;
+            font-weight: 600;
+        }
+
+        .file-upload-label svg { flex-shrink: 0; }
+
+        #field-cv { display: none; }
+
         .modal-fields-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -946,8 +977,39 @@
             border: 1px solid #f5c6cb;
         }
 
-        @media (max-width: 520px) {
-            .modal-fields-row { grid-template-columns: 1fr; }
+        @media (max-width: 600px) {
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+
+            .modal-card {
+                border-radius: 18px 18px 0 0;
+                max-height: 92vh;
+                overflow-y: auto;
+                animation: modalInMobile 0.25s ease;
+            }
+
+            @keyframes modalInMobile {
+                from { opacity: 0; transform: translateY(40px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            .modal-fields-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-header {
+                padding: 1.1rem 1.2rem;
+            }
+
+            .modal-header-text h3 {
+                font-size: 16px;
+            }
+
+            .modal-body {
+                padding: 1.2rem;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
@@ -1496,16 +1558,22 @@
             <button class="btn-primary" onclick="openApplicationModal()">Aplicar Ahora</button>
             
             <div class="contact-info" id="contact">
-                <p style="color: white; font-size: 15px; margin-bottom: 1rem;">CONTACTO Y POSTULACIÓN</p>
-                <div class="contact-email">reclutamiento@zondatech.cl</div>
-                <p>Sitio web: www.zondatech.cl</p>
-                <p style="margin-top: 1.5rem; font-size: 13px; opacity: 0.85;">Documentos requeridos para postular:</p>
-                <ul style="text-align: left; display: inline-block; margin-top: 0.5rem; font-size: 13px;">
-                    <li>CV actualizado (máximo 2 páginas)</li>
-                    <li>Carta de presentación personalizada</li>
-                    <li>Portfolio de campañas exitosas (deseable)</li>
-                    <li>Referencias de empleadores anteriores</li>
-                </ul>
+                <p style="color: white; font-size: 15px; margin-bottom: 1rem; letter-spacing: 0.5px;">PROCESO DE POSTULACIÓN</p>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left; max-width: 380px; margin: 0 auto;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px;">
+                        <span style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</span>
+                        <span>Haz clic en <strong>Aplicar Ahora</strong> y completa el formulario en línea</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px;">
+                        <span style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</span>
+                        <span>Recibirás un <strong>email de confirmación</strong> automático al instante</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px;">
+                        <span style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</span>
+                        <span>Nuestro equipo revisará tu perfil y se contactará contigo a la brevedad</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 12px; opacity: 0.7;">Consultas: reclutamiento@zondatech.cl</p>
             </div>
         </div>
     </div>
@@ -1546,6 +1614,15 @@
                     <div class="modal-field">
                         <label>¿Por qué quieres unirte a Zonda Tech?</label>
                         <textarea id="field-mensaje" placeholder="Cuéntanos sobre tu experiencia y motivación..."></textarea>
+                    </div>
+                    <div class="modal-field">
+                        <label>CV <span class="req">*</span></label>
+                        <input type="file" id="field-cv" accept=".pdf" required onchange="onCvSelected(this)">
+                        <label for="field-cv" class="file-upload-label" id="cv-label">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <span id="cv-label-text">Subir CV en PDF (máx. 5MB)</span>
+                        </label>
+                        <span class="field-error" id="error-cv"></span>
                     </div>
                     <button type="submit" class="modal-submit" id="submitBtn">Enviar Postulación</button>
                     <div class="modal-feedback" id="modalFeedback"></div>
@@ -1618,6 +1695,35 @@
             }
         }
 
+        function onCvSelected(input) {
+            const label = document.getElementById('cv-label');
+            const labelText = document.getElementById('cv-label-text');
+            const errorEl = document.getElementById('error-cv');
+            const file = input.files[0];
+
+            if (!file) return;
+
+            if (file.type !== 'application/pdf') {
+                errorEl.textContent = 'Solo se aceptan archivos PDF.';
+                input.value = '';
+                label.classList.remove('has-file');
+                labelText.textContent = 'Subir CV en PDF (máx. 5MB)';
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                errorEl.textContent = 'El archivo supera el límite de 5MB.';
+                input.value = '';
+                label.classList.remove('has-file');
+                labelText.textContent = 'Subir CV en PDF (máx. 5MB)';
+                return;
+            }
+
+            errorEl.textContent = '';
+            label.classList.add('has-file');
+            labelText.textContent = file.name;
+        }
+
         async function submitApplication(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -1628,8 +1734,8 @@
             const telefono = document.getElementById('field-telefono').value.trim();
             const linkedin = document.getElementById('field-linkedin').value.trim();
             const mensaje = document.getElementById('field-mensaje').value.trim();
+            const cvFile = document.getElementById('field-cv').files[0];
 
-            // Validar teléfono si fue ingresado
             if (telefono && !esTelefonoChileno(telefono)) {
                 document.getElementById('field-telefono').style.borderColor = '#c0392b';
                 document.getElementById('error-telefono').textContent = 'Ingresa un número chileno válido. Ej: +56 9 1234 5678';
@@ -1638,13 +1744,31 @@
 
             feedback.className = 'modal-feedback';
             feedback.textContent = '';
-
             btn.disabled = true;
+            btn.textContent = 'Subiendo CV...';
+
+            // Subir CV a Supabase Storage
+            const fileName = `${Date.now()}_${nombre.replace(/\s+/g, '_')}.pdf`;
+            const { error: uploadError } = await supabaseClient.storage
+                .from('cvs')
+                .upload(fileName, cvFile, { contentType: 'application/pdf' });
+
+            if (uploadError) {
+                feedback.className = 'modal-feedback error';
+                feedback.textContent = 'Error al subir el CV. Por favor intenta nuevamente.';
+                btn.disabled = false;
+                btn.textContent = 'Enviar Postulación';
+                return;
+            }
+
+            const { data: urlData } = supabaseClient.storage.from('cvs').getPublicUrl(fileName);
+            const cv_url = urlData.publicUrl;
+
             btn.textContent = 'Enviando...';
 
             const { error } = await supabaseClient
                 .from('postulaciones')
-                .insert([{ nombre, email, telefono, linkedin, mensaje }]);
+                .insert([{ nombre, email, telefono, linkedin, mensaje, cv_url }]);
 
             if (error) {
                 feedback.className = 'modal-feedback error';
@@ -1652,7 +1776,6 @@
                 btn.disabled = false;
                 btn.textContent = 'Enviar Postulación';
             } else {
-                // Enviar email de confirmación al postulante
                 emailjs.send('service_777jlok', 'template_60p9wjb', {
                     to_email: email,
                     nombre: nombre,
@@ -1661,6 +1784,8 @@
                 feedback.textContent = '¡Postulación enviada exitosamente! Revisa tu correo para la confirmación.';
                 btn.textContent = 'Enviado ✓';
                 document.getElementById('applicationForm').reset();
+                document.getElementById('cv-label').classList.remove('has-file');
+                document.getElementById('cv-label-text').textContent = 'Subir CV en PDF (máx. 5MB)';
             }
         }
 
