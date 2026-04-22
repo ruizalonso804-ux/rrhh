@@ -1019,62 +1019,99 @@
             transform: translateY(0);
         }
 
-        /* ── MOBILE: assembly sin sticky ── */
+        /* ── MOBILE CAROUSEL: capas sin sticky ── */
+        .assembly-mobile {
+            display: none;
+        }
+
+        .mobile-stage {
+            position: relative;
+            width: 100%;
+            /* Aspect ratio ~1.9:1 de las imágenes */
+            padding-bottom: 53%;
+            background: #000000;
+            /* CRÍTICO: sin overflow, transform, will-change ni filter
+               para no crear stacking context que rompe mix-blend-mode en Safari iOS */
+        }
+
+        .mobile-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+
+        .mobile-layer.active {
+            opacity: 1;
+        }
+
+        .mobile-caption {
+            margin-top: 1rem;
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.55);
+            min-height: 24px;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .mobile-dot {
+            width: 28px;
+            height: 3px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .mobile-dot.active {
+            background: var(--green);
+        }
+
+        .mobile-hint {
+            margin-top: 0.8rem;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
         @media (max-width: 900px) {
-
-            /* Desactivar animación de scroll — mostrar solo imagen final */
             .assembly-wrapper {
-                height: auto !important;
-                overflow: hidden;
-            }
-
-            .assembly-sticky {
-                position: relative !important;
-                top: auto !important;
-                padding: 3rem 1.5rem 4rem;
-            }
-
-            /* Ocultar capas individuales en móvil */
-            #layer-0,
-            #layer-1,
-            #layer-2 {
-                display: none !important;
-            }
-
-            /* Capa final (keycaps) estática, sin sticky → blend mode funciona */
-            #layer-3 {
-                position: relative !important;
-                left: auto !important;
-                transform: none !important;
-                opacity: 1 !important;
-                mix-blend-mode: screen;
-                display: block;
-                width: 100%;
-                max-width: 480px;
-                margin: 0 auto;
-            }
-
-            .assembly-stage {
-                position: relative;
-                height: auto;
-                display: flex;
-                justify-content: center;
-            }
-
-            /* Ocultar dots de progreso en móvil */
-            .assembly-progress {
                 display: none;
             }
 
-            /* Mostrar solo el label de keycaps */
-            .layer-name:not(#lname-3) {
-                display: none !important;
+            .assembly-mobile {
+                display: block;
+                background: #000000;
+                padding: 4rem 1.5rem 3rem;
+                text-align: center;
             }
 
-            #lname-3 {
-                position: relative !important;
-                opacity: 1 !important;
-                transform: none !important;
+            .assembly-mobile .assembly-section-label {
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: var(--green);
+                margin-bottom: 0.6rem;
+            }
+
+            .assembly-mobile h2 {
+                font-size: 26px;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                margin-bottom: 1.8rem;
             }
         }
 
@@ -1343,6 +1380,26 @@
         </div>
     </section>
 
+    <!-- ASSEMBLY MÓVIL: carrusel táctil (visible en <900px) -->
+    <div class="assembly-mobile" id="assemblyMobile">
+        <div class="assembly-section-label">Ingeniería de precisión</div>
+        <h2>Construido capa por capa</h2>
+        <div class="mobile-stage" id="mobileStage">
+            <img src="layer_base.png" class="mobile-layer active" id="ml-0" alt="Carcasa">
+            <img src="layer_pcb.png" class="mobile-layer" id="ml-1" alt="PCB">
+            <img src="layer_switches.png" class="mobile-layer" id="ml-2" alt="Switches">
+            <img src="layer_keycaps.png" class="mobile-layer" id="ml-3" alt="Keycaps">
+        </div>
+        <div class="mobile-caption" id="mobileCaption">① Carcasa CNC de aluminio aeronáutico</div>
+        <div class="mobile-dots">
+            <span class="mobile-dot active" onclick="setMobileLayer(0)"></span>
+            <span class="mobile-dot" onclick="setMobileLayer(1)"></span>
+            <span class="mobile-dot" onclick="setMobileLayer(2)"></span>
+            <span class="mobile-dot" onclick="setMobileLayer(3)"></span>
+        </div>
+        <div class="mobile-hint">desliza para ver cada capa</div>
+    </div>
+
     <!-- KEYBOARD ASSEMBLY SCROLL -->
     <div class="assembly-wrapper" id="assembly-section">
         <div class="assembly-sticky">
@@ -1610,6 +1667,39 @@
     </footer>
 
     <script>
+        // ── MOBILE LAYER CAROUSEL ──
+        const mobileLayers = Array.from(document.querySelectorAll('.mobile-layer'));
+        const mobileDots = Array.from(document.querySelectorAll('.mobile-dot'));
+        const mobileCaptions = [
+            '① Carcasa CNC de aluminio aeronáutico',
+            '② PCB con LEDs RGB individuales por tecla',
+            '③ Switches mecánicos · 100M pulsaciones',
+            '④ Keycaps PBT doble inyección · Anti-huellas',
+        ];
+        let mobileActive = 0;
+
+        function setMobileLayer(idx) {
+            mobileLayers[mobileActive].classList.remove('active');
+            mobileDots[mobileActive].classList.remove('active');
+            mobileActive = (idx + 4) % 4;
+            mobileLayers[mobileActive].classList.add('active');
+            mobileDots[mobileActive].classList.add('active');
+            document.getElementById('mobileCaption').textContent = mobileCaptions[mobileActive];
+        }
+
+        // Swipe support
+        const mobileStage = document.getElementById('mobileStage');
+        if (mobileStage) {
+            let tx = 0;
+            mobileStage.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+            mobileStage.addEventListener('touchend', e => {
+                const diff = tx - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) setMobileLayer(mobileActive + (diff > 0 ? 1 : -1));
+            }, { passive: true });
+            // Tap to advance
+            mobileStage.addEventListener('click', () => setMobileLayer(mobileActive + 1));
+        }
+
         // ── NAVBAR ──
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('open');
