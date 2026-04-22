@@ -1019,6 +1019,65 @@
             transform: translateY(0);
         }
 
+        /* ── MOBILE: assembly sin sticky ── */
+        @media (max-width: 900px) {
+
+            /* Desactivar animación de scroll — mostrar solo imagen final */
+            .assembly-wrapper {
+                height: auto !important;
+                overflow: hidden;
+            }
+
+            .assembly-sticky {
+                position: relative !important;
+                top: auto !important;
+                padding: 3rem 1.5rem 4rem;
+            }
+
+            /* Ocultar capas individuales en móvil */
+            #layer-0,
+            #layer-1,
+            #layer-2 {
+                display: none !important;
+            }
+
+            /* Capa final (keycaps) estática, sin sticky → blend mode funciona */
+            #layer-3 {
+                position: relative !important;
+                left: auto !important;
+                transform: none !important;
+                opacity: 1 !important;
+                mix-blend-mode: screen;
+                display: block;
+                width: 100%;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .assembly-stage {
+                position: relative;
+                height: auto;
+                display: flex;
+                justify-content: center;
+            }
+
+            /* Ocultar dots de progreso en móvil */
+            .assembly-progress {
+                display: none;
+            }
+
+            /* Mostrar solo el label de keycaps */
+            .layer-name:not(#lname-3) {
+                display: none !important;
+            }
+
+            #lname-3 {
+                position: relative !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
             .hero-content {
