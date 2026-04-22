@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zonda Tech Chile — Tecnología Gaming para Latinoamérica</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         :root {
             --green: #2D8B7A;
             --green-dark: #1B5E4C;
-            --green-glow: rgba(45,139,122,0.35);
+            --green-glow: rgba(45, 139, 122, 0.35);
             --black: #000000;
             --gray-900: #0a0a0a;
             --gray-800: #111111;
@@ -21,7 +28,9 @@
             --white: #ffffff;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
@@ -33,17 +42,19 @@
         /* ── NAVBAR ── */
         .navbar {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             padding: 0 2.5rem;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: background 0.3s;
         }
 
@@ -54,7 +65,10 @@
             text-decoration: none;
         }
 
-        .navbar-logo img { height: 36px; width: auto; }
+        .navbar-logo img {
+            height: 36px;
+            width: auto;
+        }
 
         .navbar-logo span {
             font-family: 'Rajdhani', sans-serif;
@@ -72,7 +86,7 @@
         }
 
         .navbar-links a {
-            color: rgba(255,255,255,0.75);
+            color: rgba(255, 255, 255, 0.75);
             text-decoration: none;
             font-size: 13.5px;
             font-weight: 500;
@@ -80,7 +94,9 @@
             transition: color 0.2s;
         }
 
-        .navbar-links a:hover { color: white; }
+        .navbar-links a:hover {
+            color: white;
+        }
 
         .navbar-links .nav-cta {
             background: var(--green);
@@ -116,9 +132,17 @@
             transition: all 0.3s;
         }
 
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
 
         /* ── HERO ── */
         .hero {
@@ -134,9 +158,11 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -200px; left: -200px;
-            width: 700px; height: 700px;
-            background: radial-gradient(circle, rgba(45,139,122,0.18) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(45, 139, 122, 0.18) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -153,8 +179,8 @@
 
         .hero-text .hero-badge {
             display: inline-block;
-            background: rgba(45,139,122,0.15);
-            border: 1px solid rgba(45,139,122,0.4);
+            background: rgba(45, 139, 122, 0.15);
+            border: 1px solid rgba(45, 139, 122, 0.4);
             color: var(--green);
             font-size: 12px;
             font-weight: 600;
@@ -182,7 +208,7 @@
 
         .hero-text p {
             font-size: 18px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.7;
             max-width: 480px;
             margin-bottom: 2.5rem;
@@ -210,7 +236,7 @@
         .btn-primary:hover {
             background: var(--green-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(45,139,122,0.4);
+            box-shadow: 0 8px 24px rgba(45, 139, 122, 0.4);
         }
 
         .btn-ghost {
@@ -221,13 +247,13 @@
             font-size: 15px;
             font-weight: 600;
             text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             transition: border-color 0.2s, background 0.2s;
         }
 
         .btn-ghost:hover {
-            border-color: rgba(255,255,255,0.6);
-            background: rgba(255,255,255,0.05);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .hero-image {
@@ -242,17 +268,28 @@
         .hero-image::before {
             content: '';
             position: absolute;
-            width: 520px; height: 260px;
-            background: radial-gradient(ellipse, rgba(45,139,122,0.28) 0%, transparent 70%);
-            top: 50%; left: 50%;
+            width: 520px;
+            height: 260px;
+            background: radial-gradient(ellipse, rgba(45, 139, 122, 0.28) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             pointer-events: none;
             animation: glowPulse 4s ease-in-out infinite;
         }
 
         @keyframes glowPulse {
-            0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-            50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.08);
+            }
         }
 
         .hero-image img {
@@ -265,8 +302,15 @@
         }
 
         @keyframes floatKbd {
-            0%, 100% { transform: translateY(0px) rotateX(2deg); }
-            50%       { transform: translateY(-14px) rotateX(-1deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotateX(2deg);
+            }
+
+            50% {
+                transform: translateY(-14px) rotateX(-1deg);
+            }
         }
 
         /* Linha de luz horizontal */
@@ -274,16 +318,24 @@
             content: '';
             position: absolute;
             bottom: 28%;
-            left: 10%; right: 10%;
+            left: 10%;
+            right: 10%;
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(45,139,122,0.6), transparent);
+            background: linear-gradient(to right, transparent, rgba(45, 139, 122, 0.6), transparent);
             animation: lineFade 5s ease-in-out infinite;
             pointer-events: none;
         }
 
         @keyframes lineFade {
-            0%, 100% { opacity: 0.4; }
-            50%       { opacity: 0.9; }
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
         }
 
         /* Partículas flotantes */
@@ -296,7 +348,8 @@
 
         .hero-particles span {
             position: absolute;
-            width: 2px; height: 2px;
+            width: 2px;
+            height: 2px;
             border-radius: 50%;
             background: var(--green);
             opacity: 0;
@@ -304,10 +357,23 @@
         }
 
         @keyframes particleFloat {
-            0%   { opacity: 0;   transform: translateY(0)   scale(1); }
-            20%  { opacity: 0.8; }
-            80%  { opacity: 0.5; }
-            100% { opacity: 0;   transform: translateY(-80px) scale(0.3); }
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1);
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            80% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(0.3);
+            }
         }
 
         /* ── KEYBOARD ASSEMBLY SCROLL ── */
@@ -332,10 +398,12 @@
         .assembly-sticky::before {
             content: '';
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 700px; height: 400px;
-            background: radial-gradient(ellipse, rgba(45,139,122,0.12) 0%, transparent 70%);
+            width: 700px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(45, 139, 122, 0.12) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -373,12 +441,12 @@
 
         .layer-img {
             position: absolute;
-            top: 0; left: 50%;
+            top: 0;
+            left: 50%;
             transform: translateX(-50%);
             width: 100%;
             max-width: 720px;
             mix-blend-mode: screen;
-            will-change: transform, opacity;
             pointer-events: none;
         }
 
@@ -421,7 +489,7 @@
             width: 28px;
             height: 3px;
             border-radius: 3px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             transition: background 0.3s, width 0.3s;
         }
 
@@ -440,7 +508,7 @@
             flex-direction: column;
             align-items: center;
             gap: 6px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -453,8 +521,15 @@
         }
 
         @keyframes bounceDown {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(5px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(5px);
+            }
         }
 
         /* ── PRODUCTS ── */
@@ -486,7 +561,7 @@
 
         .section-subtitle {
             font-size: 17px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-top: 1rem;
             max-width: 520px;
             margin-left: auto;
@@ -509,14 +584,17 @@
             border-radius: 20px;
             overflow: hidden;
             background: #000;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             cursor: default;
+            -webkit-tap-highlight-color: transparent;
             transition: border-color 0.35s, box-shadow 0.35s;
         }
 
-        .bento-card:hover {
-            border-color: rgba(45,139,122,0.35);
-            box-shadow: 0 0 0 1px rgba(45,139,122,0.15), 0 24px 60px rgba(0,0,0,0.6);
+        @media (hover: hover) and (pointer: fine) {
+            .bento-card:hover {
+                border-color: rgba(45, 139, 122, 0.35);
+                box-shadow: 0 0 0 1px rgba(45, 139, 122, 0.15), 0 24px 60px rgba(0, 0, 0, 0.6);
+            }
         }
 
         /* Card grande: teclado */
@@ -549,20 +627,24 @@
             max-height: 100%;
             object-fit: contain;
             mix-blend-mode: screen;
-            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
         }
 
-        .bento-card:hover .bento-img img {
-            transform: scale(1.06) translateY(-6px);
-            filter: drop-shadow(0 20px 48px rgba(45,139,122,0.5));
+        @media (hover: hover) and (pointer: fine) {
+            .bento-card:hover .bento-img img {
+                transform: scale(1.06) translateY(-6px);
+                filter: drop-shadow(0 20px 48px rgba(45, 139, 122, 0.5));
+            }
         }
 
         /* Overlay gradiente en la base */
         .bento-overlay {
             position: absolute;
-            bottom: 0; left: 0; right: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: 55%;
-            background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
             pointer-events: none;
         }
 
@@ -590,11 +672,13 @@
             margin-bottom: 6px;
         }
 
-        .bento-card.bento-main .bento-name { font-size: 26px; }
+        .bento-card.bento-main .bento-name {
+            font-size: 26px;
+        }
 
         .bento-spec {
             font-size: 13px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(255, 255, 255, 0.45);
             line-height: 1.5;
         }
 
@@ -609,7 +693,8 @@
 
         .bento-particles span {
             position: absolute;
-            width: 2px; height: 2px;
+            width: 2px;
+            height: 2px;
             border-radius: 50%;
             background: var(--green);
             opacity: 0;
@@ -622,8 +707,8 @@
             top: 1.2rem;
             left: 1.4rem;
             z-index: 3;
-            background: rgba(45,139,122,0.18);
-            border: 1px solid rgba(45,139,122,0.4);
+            background: rgba(45, 139, 122, 0.18);
+            border: 1px solid rgba(45, 139, 122, 0.4);
             color: var(--green);
             font-size: 10.5px;
             font-weight: 700;
@@ -645,7 +730,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
-            background: rgba(255,255,255,0.07);
+            background: rgba(255, 255, 255, 0.07);
             border-radius: 16px;
             overflow: hidden;
         }
@@ -669,7 +754,7 @@
 
         .stat-label {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             line-height: 1.4;
         }
 
@@ -694,7 +779,7 @@
         .culture-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(27,94,76,0.25) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(27, 94, 76, 0.25) 100%);
         }
 
         .culture-content {
@@ -714,16 +799,16 @@
         }
 
         .value-card {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 2rem;
             transition: border-color 0.3s, transform 0.3s;
         }
 
         .value-card:hover {
-            border-color: rgba(45,139,122,0.5);
+            border-color: rgba(45, 139, 122, 0.5);
             transform: translateY(-4px);
         }
 
@@ -740,7 +825,7 @@
 
         .value-card p {
             font-size: 13.5px;
-            color: rgba(255,255,255,0.55);
+            color: rgba(255, 255, 255, 0.55);
             line-height: 1.6;
         }
 
@@ -764,7 +849,7 @@
 
         .job-card {
             background: var(--gray-800);
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 16px;
             padding: 1.8rem 2rem;
             display: flex;
@@ -775,9 +860,9 @@
         }
 
         .job-card:hover {
-            border-color: rgba(45,139,122,0.4);
+            border-color: rgba(45, 139, 122, 0.4);
             transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
         }
 
         .job-status-dot {
@@ -789,7 +874,9 @@
             flex-shrink: 0;
         }
 
-        .job-info { flex: 1; }
+        .job-info {
+            flex: 1;
+        }
 
         .job-title {
             font-size: 17px;
@@ -805,7 +892,7 @@
 
         .job-meta span {
             font-size: 13px;
-            color: rgba(255,255,255,0.45);
+            color: rgba(255, 255, 255, 0.45);
             display: flex;
             align-items: center;
             gap: 5px;
@@ -826,12 +913,21 @@
             letter-spacing: 0.3px;
         }
 
-        .tag-area { background: rgba(45,139,122,0.15); color: #4db8a8; border: 1px solid rgba(45,139,122,0.3); }
-        .tag-mode { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
+        .tag-area {
+            background: rgba(45, 139, 122, 0.15);
+            color: #4db8a8;
+            border: 1px solid rgba(45, 139, 122, 0.3);
+        }
+
+        .tag-mode {
+            background: rgba(255, 255, 255, 0.07);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
 
         .btn-ver {
             background: transparent;
-            border: 1px solid rgba(45,139,122,0.6);
+            border: 1px solid rgba(45, 139, 122, 0.6);
             color: var(--green);
             padding: 10px 22px;
             border-radius: 50px;
@@ -851,7 +947,7 @@
         /* ── FOOTER ── */
         footer {
             background: #000;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             padding: 3rem 2.5rem;
         }
 
@@ -872,7 +968,9 @@
             text-decoration: none;
         }
 
-        .footer-logo img { height: 32px; }
+        .footer-logo img {
+            height: 32px;
+        }
 
         .footer-logo span {
             font-family: 'Rajdhani', sans-serif;
@@ -880,12 +978,12 @@
             font-size: 17px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .footer-copy {
             font-size: 12.5px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             text-align: center;
         }
 
@@ -896,12 +994,14 @@
 
         .footer-links a {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
             transition: color 0.2s;
         }
 
-        .footer-links a:hover { color: var(--green); }
+        .footer-links a:hover {
+            color: var(--green);
+        }
 
         /* ── REVEAL ON SCROLL ── */
         .reveal {
@@ -923,77 +1023,203 @@
                 gap: 2.5rem;
             }
 
-            .hero-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
-            .hero-buttons { justify-content: center; }
-            .hero-image { min-height: 340px; }
-            .hero-image img { max-width: 380px; }
+            .hero-text p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-            .assembly-stage { height: 260px; max-width: 500px; }
-            .layer-img { max-width: 500px; }
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                min-height: 340px;
+            }
+
+            .hero-image img {
+                max-width: 380px;
+            }
+
+            .assembly-stage {
+                height: 260px;
+                max-width: 500px;
+            }
+
+            .layer-img {
+                max-width: 500px;
+            }
 
             .products-bento {
                 grid-template-columns: 1fr;
                 grid-template-rows: 380px 280px 280px 220px;
             }
-            .bento-card.bento-main { grid-row: span 1; }
 
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .bento-card.bento-main {
+                grid-row: span 1;
+            }
 
-            .culture-values { grid-template-columns: 1fr; }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-            .job-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .btn-ver { align-self: flex-start; }
+            .culture-values {
+                grid-template-columns: 1fr;
+            }
 
-            .footer-inner { flex-direction: column; align-items: center; text-align: center; }
-            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .job-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .btn-ver {
+                align-self: flex-start;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 600px) {
-            .navbar { padding: 0 1.2rem; }
-            .navbar-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: rgba(0,0,0,0.95); padding: 1.5rem 2rem; gap: 1.2rem; }
-            .navbar-links.open { display: flex; }
-            .hamburger { display: flex; }
+            .navbar {
+                padding: 0 1.2rem;
+            }
 
-            .hero { padding: 80px 1.2rem 3rem; }
-            .hero-text h1 { font-size: 36px; letter-spacing: -1px; }
-            .hero-text p { font-size: 15px; }
-            .hero-image { min-height: 240px; }
-            .hero-image img { max-width: 240px; }
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 1.5rem 2rem;
+                gap: 1.2rem;
+            }
 
-            .assembly-wrapper { height: 280vh; }
-            .assembly-stage { height: 180px; max-width: 300px; }
-            .layer-img { max-width: 300px; }
-            .assembly-heading h2 { font-size: 22px; }
-            .assembly-section-label { font-size: 10px; }
-            .feature-label { font-size: 12px; padding: 6px 12px; }
+            .navbar-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero {
+                padding: 80px 1.2rem 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+
+            .hero-text p {
+                font-size: 15px;
+            }
+
+            .hero-image {
+                min-height: 240px;
+            }
+
+            .hero-image img {
+                max-width: 240px;
+            }
+
+            .assembly-wrapper {
+                height: 280vh;
+            }
+
+            .assembly-stage {
+                height: 180px;
+                max-width: 300px;
+            }
+
+            .layer-img {
+                max-width: 300px;
+            }
+
+            .assembly-heading h2 {
+                font-size: 22px;
+            }
+
+            .assembly-section-label {
+                font-size: 10px;
+            }
+
+            .feature-label {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
 
             .products-section,
             .stats-section,
-            .jobs-section { padding: 60px 1.2rem; }
+            .jobs-section {
+                padding: 60px 1.2rem;
+            }
 
             .products-bento {
                 grid-template-rows: 300px 240px 240px 180px;
             }
 
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .stat-item { padding: 1.5rem 0.8rem; }
-            .stat-number { font-size: 36px; }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-            .culture-content { padding: 60px 1.2rem; }
-            .culture-title { font-size: 28px; }
+            .stat-item {
+                padding: 1.5rem 0.8rem;
+            }
 
-            .jobs-title { font-size: 28px; }
-            .job-role { font-size: 16px; }
+            .stat-number {
+                font-size: 36px;
+            }
+
+            .culture-content {
+                padding: 60px 1.2rem;
+            }
+
+            .culture-title {
+                font-size: 28px;
+            }
+
+            .jobs-title {
+                font-size: 28px;
+            }
+
+            .job-role {
+                font-size: 16px;
+            }
         }
 
         @media (max-width: 400px) {
-            .hero-text h1 { font-size: 30px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .stat-number { font-size: 30px; }
-            .bento-title { font-size: 15px; }
+            .hero-text h1 {
+                font-size: 30px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-number {
+                font-size: 30px;
+            }
+
+            .bento-title {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- NAVBAR -->
@@ -1019,7 +1245,8 @@
             <div class="hero-text">
                 <div class="hero-badge">Tecnología Gaming · Latinoamérica</div>
                 <h1>Redefiniendo el<br><span>gaming en LATAM</span></h1>
-                <p>Diseñamos y comercializamos periféricos gaming e inteligentes de alto rendimiento. Nacimos en Chile, pensamos en toda Latinoamérica.</p>
+                <p>Diseñamos y comercializamos periféricos gaming e inteligentes de alto rendimiento. Nacimos en Chile,
+                    pensamos en toda Latinoamérica.</p>
                 <div class="hero-buttons">
                     <a href="#productos" class="btn-primary">Ver productos</a>
                     <a href="#empleos" class="btn-ghost">Trabaja con nosotros</a>
@@ -1053,10 +1280,12 @@
 
             <!-- Imagen grande centrada — capas apiladas con mix-blend-mode -->
             <div class="assembly-stage">
-                <img src="layer_base.png"     alt="Carcasa"  class="layer-img" id="layer-0">
-                <img src="layer_pcb.png"      alt="PCB"      class="layer-img" id="layer-1">
+                <img src="layer_base.png" alt="Carcasa" class="layer-img" id="layer-0">
+                <img src="layer_pcb.png" alt="PCB" class="layer-img" id="layer-1">
                 <img src="layer_switches.png" alt="Switches" class="layer-img" id="layer-2">
-                <img src="layer_keycaps.png"  alt="Keycaps"  class="layer-img" id="layer-3">
+                <img src="layer_keycaps.png" alt="Keycaps" class="layer-img" id="layer-3">
+                <img src="keyboard_hero.png" alt="Teclado ensamblado" class="layer-img" id="layer-assembled"
+                    style="opacity:0;mix-blend-mode:screen;">
             </div>
 
             <!-- Nombre de capa activa -->
@@ -1077,7 +1306,9 @@
 
             <!-- Scroll hint (desaparece al avanzar) -->
             <div class="scroll-hint" id="scroll-hint">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
                 Scroll
             </div>
         </div>
@@ -1173,7 +1404,8 @@
                 <div class="bento-info">
                     <div class="bento-tag">Mousepad XL</div>
                     <div class="bento-name">ZT-P1 Extended</div>
-                    <div class="bento-spec">900×400mm · Superficie textil de alta velocidad · RGB perimetral de 16 zonas</div>
+                    <div class="bento-spec">900×400mm · Superficie textil de alta velocidad · RGB perimetral de 16 zonas
+                    </div>
                 </div>
             </div>
         </div>
@@ -1185,7 +1417,8 @@
         <div class="section-header reveal">
             <div class="section-label">Quiénes somos</div>
             <div class="section-title">Tecnología chilena,<br>visión latinoamericana</div>
-            <p class="section-subtitle">Nacimos en Santiago con la convicción de que la tecnología de punta no debía ser exclusiva de grandes mercados.</p>
+            <p class="section-subtitle">Nacimos en Santiago con la convicción de que la tecnología de punta no debía ser
+                exclusiva de grandes mercados.</p>
         </div>
         <div class="stats-grid reveal">
             <div class="stat-item">
@@ -1220,17 +1453,20 @@
                 <div class="value-card reveal">
                     <div class="value-icon">🚀</div>
                     <h4>Innovación constante</h4>
-                    <p>Cuestionamos el statu quo. Buscamos activamente nuevas formas de hacer las cosas y premiamos las ideas que generan impacto real.</p>
+                    <p>Cuestionamos el statu quo. Buscamos activamente nuevas formas de hacer las cosas y premiamos las
+                        ideas que generan impacto real.</p>
                 </div>
                 <div class="value-card reveal">
                     <div class="value-icon">📊</div>
                     <h4>Decisiones basadas en datos</h4>
-                    <p>La intuición suma, pero los datos deciden. Construimos una cultura donde las métricas son el lenguaje común del equipo.</p>
+                    <p>La intuición suma, pero los datos deciden. Construimos una cultura donde las métricas son el
+                        lenguaje común del equipo.</p>
                 </div>
                 <div class="value-card reveal">
                     <div class="value-icon">🌎</div>
                     <h4>Visión latinoamericana</h4>
-                    <p>Pensamos en grande desde Chile. Nuestra ambición es construir una marca que resuene en toda la región.</p>
+                    <p>Pensamos en grande desde Chile. Nuestra ambición es construir una marca que resuene en toda la
+                        región.</p>
                 </div>
             </div>
         </div>
@@ -1242,7 +1478,8 @@
             <div class="section-header reveal">
                 <div class="section-label">Únete al equipo</div>
                 <div class="section-title">Puestos disponibles</div>
-                <p class="section-subtitle">Sé parte de la empresa que está transformando el gaming en Latinoamérica.</p>
+                <p class="section-subtitle">Sé parte de la empresa que está transformando el gaming en Latinoamérica.
+                </p>
             </div>
             <div class="jobs-list reveal">
                 <div class="job-card">
@@ -1251,11 +1488,19 @@
                         <div class="job-title">Gerente de Marketing Estratégico</div>
                         <div class="job-meta">
                             <span>
-                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
                                 Santiago, Chile
                             </span>
                             <span>
-                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                                    <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+                                </svg>
                                 Tiempo completo
                             </span>
                             <span>Publicado 8 de abril 2026</span>
@@ -1313,6 +1558,7 @@
             document.getElementById('layer-2'),
             document.getElementById('layer-3'),
         ];
+        const layerAssembled = document.getElementById('layer-assembled');
 
         const lnames = [
             document.getElementById('lname-0'),
@@ -1330,7 +1576,7 @@
 
         // Cada fase: una capa visible a la vez con crossfade
         // Fases: [0-0.22] base, [0.22-0.44] pcb, [0.44-0.66] switches, [0.66-0.88] keycaps
-        // [0.88-1.0] teclado completo ensamblado (keycaps permanece, fantasmas del resto)
+        // [0.88-1.0] teclado completo ensamblado → keyboard_hero.png reemplaza las capas
         const PHASE = 0.22;
         const ASSEMBLED_START = 0.88;
 
@@ -1340,74 +1586,71 @@
             const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
 
             const activeLayer = Math.min(3, Math.floor(progress / PHASE));
+            const assembledP = progress >= ASSEMBLED_START
+                ? easeOut((progress - ASSEMBLED_START) / 0.12)
+                : 0;
 
             layers.forEach((layer, i) => {
                 const phaseStart = i * PHASE;
-                const phaseEnd   = phaseStart + PHASE;
+                const phaseEnd = phaseStart + PHASE;
 
                 let opacity, translateY, scale;
 
                 if (progress < phaseStart) {
-                    // Todavía no aparece — espera abajo
-                    opacity    = 0;
+                    opacity = 0;
                     translateY = 60;
-                    scale      = 0.96;
+                    scale = 0.96;
 
                 } else if (progress < phaseStart + PHASE * 0.45) {
-                    // Entrando (primera mitad de su fase)
-                    const p    = easeOut((progress - phaseStart) / (PHASE * 0.45));
-                    opacity    = p;
+                    const p = easeOut((progress - phaseStart) / (PHASE * 0.45));
+                    opacity = p;
                     translateY = 60 * (1 - p);
-                    scale      = 0.96 + 0.04 * p;
+                    scale = 0.96 + 0.04 * p;
 
                 } else if (progress < phaseEnd && i < 3) {
-                    // Visible plena (segunda mitad de su fase, solo capas 0-2)
-                    opacity    = 1;
+                    opacity = 1;
                     translateY = 0;
-                    scale      = 1;
+                    scale = 1;
 
                 } else if (i < 3 && progress < ASSEMBLED_START) {
-                    // Saliendo — flota hacia arriba y desaparece
-                    const p    = easeOut(Math.min(1, (progress - phaseEnd) / (PHASE * 0.6)));
-                    opacity    = 1 - p;
+                    const p = easeOut(Math.min(1, (progress - phaseEnd) / (PHASE * 0.6)));
+                    opacity = 1 - p;
                     translateY = -40 * p;
-                    scale      = 1 - 0.03 * p;
+                    scale = 1 - 0.03 * p;
 
                 } else if (i === 3 && progress >= phaseStart) {
-                    // Capa keycaps: entra y se queda hasta el final
+                    // Keycaps: entra normalmente y se desvanece al aparecer el ensamblado
                     if (progress < phaseStart + PHASE * 0.45) {
                         const p = easeOut((progress - phaseStart) / (PHASE * 0.45));
-                        opacity    = p;
+                        opacity = p;
                         translateY = 60 * (1 - p);
-                        scale      = 0.96 + 0.04 * p;
+                        scale = 0.96 + 0.04 * p;
                     } else {
-                        opacity    = 1;
+                        opacity = 1 - assembledP;
                         translateY = 0;
-                        scale      = 1;
+                        scale = 1;
                     }
 
-                } else if (i < 3 && progress >= ASSEMBLED_START) {
-                    // Fase ensamblado: capas 0-2 reaparecen como fantasmas
-                    const p    = easeOut((progress - ASSEMBLED_START) / 0.12);
-                    opacity    = 0.18 * p;
-                    translateY = 0;
-                    scale      = 1;
-
                 } else {
-                    opacity    = 0;
+                    opacity = 0;
                     translateY = 0;
-                    scale      = 1;
+                    scale = 1;
                 }
 
-                layer.style.opacity   = opacity;
+                layer.style.opacity = opacity;
                 layer.style.transform = `translateX(-50%) translateY(${translateY}px) scale(${scale})`;
-                layer.style.zIndex    = i;
+                layer.style.zIndex = i;
             });
+
+            // Imagen ensamblada final (keyboard_hero.png)
+            layerAssembled.style.opacity = assembledP;
+            layerAssembled.style.transform = `translateX(-50%) translateY(0px) scale(1)`;
+            layerAssembled.style.zIndex = 10;
 
             // Label activo
             lnames.forEach((el, i) => {
-                const isActive = (i === activeLayer && progress > i * PHASE + 0.02)
-                              || (progress >= ASSEMBLED_START && i === 3);
+                const isActive = (i === activeLayer && progress > i * PHASE + 0.02 && progress < ASSEMBLED_START)
+                    || (i === 3 && progress >= ASSEMBLED_START);
                 el.classList.toggle('visible', isActive);
             });
 
@@ -1459,4 +1702,5 @@
         updateAssembly();
     </script>
 </body>
+
 </html>
