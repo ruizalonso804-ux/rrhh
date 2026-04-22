@@ -390,7 +390,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            clip-path: inset(0);
             background: var(--black);
         }
 
@@ -570,6 +570,10 @@
         }
 
         /* Bento grid */
+        .products-bento-mousepad {
+            grid-template-rows: 260px;
+        }
+
         .products-bento {
             max-width: 1100px;
             margin: 0 auto;
@@ -1052,7 +1056,15 @@
 
             .products-bento {
                 grid-template-columns: 1fr;
-                grid-template-rows: 380px 280px 280px 220px;
+                grid-template-rows: auto;
+            }
+
+            .products-bento .bento-card {
+                min-height: 280px;
+            }
+
+            .products-bento .bento-card.bento-main {
+                min-height: 360px;
             }
 
             .bento-card.bento-main {
@@ -1167,8 +1179,12 @@
                 padding: 60px 1.2rem;
             }
 
-            .products-bento {
-                grid-template-rows: 300px 240px 240px 180px;
+            .products-bento .bento-card {
+                min-height: 240px;
+            }
+
+            .products-bento .bento-card.bento-main {
+                min-height: 300px;
             }
 
             .stats-grid {
@@ -1284,8 +1300,6 @@
                 <img src="layer_pcb.png" alt="PCB" class="layer-img" id="layer-1">
                 <img src="layer_switches.png" alt="Switches" class="layer-img" id="layer-2">
                 <img src="layer_keycaps.png" alt="Keycaps" class="layer-img" id="layer-3">
-                <img src="keyboard_hero.png" alt="Teclado ensamblado" class="layer-img" id="layer-assembled"
-                    style="opacity:0;mix-blend-mode:screen;">
             </div>
 
             <!-- Nombre de capa activa -->
@@ -1386,7 +1400,7 @@
         </div>
 
         <!-- Mousepad — fila completa abajo -->
-        <div class="products-bento" style="margin-top: 1rem; grid-template-columns: 1fr; grid-template-rows: 260px;">
+        <div class="products-bento products-bento-mousepad" style="margin-top: 1rem; grid-template-columns: 1fr;">
             <div class="bento-card reveal" style="display:flex; flex-direction:column; justify-content:flex-end;">
                 <div class="bento-badge">Nuevo</div>
                 <div class="bento-particles">
@@ -1558,8 +1572,6 @@
             document.getElementById('layer-2'),
             document.getElementById('layer-3'),
         ];
-        const layerAssembled = document.getElementById('layer-assembled');
-
         const lnames = [
             document.getElementById('lname-0'),
             document.getElementById('lname-1'),
@@ -1574,11 +1586,8 @@
             document.getElementById('dot-3'),
         ];
 
-        // Cada fase: una capa visible a la vez con crossfade
-        // Fases: [0-0.22] base, [0.22-0.44] pcb, [0.44-0.66] switches, [0.66-0.88] keycaps
-        // [0.88-1.0] teclado completo ensamblado → keyboard_hero.png reemplaza las capas
-        const PHASE = 0.22;
-        const ASSEMBLED_START = 0.88;
+        // Fases: [0-0.25] base, [0.25-0.5] pcb, [0.5-0.75] switches, [0.75-1.0] keycaps (queda fija)
+        const PHASE = 0.25;
 
         function updateAssembly() {
             const rect = assemblySection.getBoundingClientRect();
@@ -1586,9 +1595,6 @@
             const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
 
             const activeLayer = Math.min(3, Math.floor(progress / PHASE));
-            const assembledP = progress >= ASSEMBLED_START
-                ? easeOut((progress - ASSEMBLED_START) / 0.12)
-                : 0;
 
             layers.forEach((layer, i) => {
                 const phaseStart = i * PHASE;
@@ -1597,42 +1603,34 @@
                 let opacity, translateY, scale;
 
                 if (progress < phaseStart) {
+                    // Todavía no aparece
                     opacity = 0;
                     translateY = 60;
                     scale = 0.96;
 
                 } else if (progress < phaseStart + PHASE * 0.45) {
+                    // Entrando
                     const p = easeOut((progress - phaseStart) / (PHASE * 0.45));
                     opacity = p;
                     translateY = 60 * (1 - p);
                     scale = 0.96 + 0.04 * p;
 
-                } else if (progress < phaseEnd && i < 3) {
+                } else if (i < 3 && progress < phaseEnd) {
+                    // Visible plena (capas 0-2)
                     opacity = 1;
                     translateY = 0;
                     scale = 1;
 
-                } else if (i < 3 && progress < ASSEMBLED_START) {
+                } else if (i < 3) {
+                    // Saliendo (capas 0-2)
                     const p = easeOut(Math.min(1, (progress - phaseEnd) / (PHASE * 0.6)));
                     opacity = 1 - p;
                     translateY = -40 * p;
                     scale = 1 - 0.03 * p;
 
-                } else if (i === 3 && progress >= phaseStart) {
-                    // Keycaps: entra normalmente y se desvanece al aparecer el ensamblado
-                    if (progress < phaseStart + PHASE * 0.45) {
-                        const p = easeOut((progress - phaseStart) / (PHASE * 0.45));
-                        opacity = p;
-                        translateY = 60 * (1 - p);
-                        scale = 0.96 + 0.04 * p;
-                    } else {
-                        opacity = 1 - assembledP;
-                        translateY = 0;
-                        scale = 1;
-                    }
-
                 } else {
-                    opacity = 0;
+                    // Keycaps (capa 3): entra y se queda hasta el final
+                    opacity = 1;
                     translateY = 0;
                     scale = 1;
                 }
@@ -1642,16 +1640,9 @@
                 layer.style.zIndex = i;
             });
 
-            // Imagen ensamblada final (keyboard_hero.png)
-            layerAssembled.style.opacity = assembledP;
-            layerAssembled.style.transform = `translateX(-50%) translateY(0px) scale(1)`;
-            layerAssembled.style.zIndex = 10;
-
             // Label activo
             lnames.forEach((el, i) => {
-                const isActive = (i === activeLayer && progress > i * PHASE + 0.02 && progress < ASSEMBLED_START)
-                    || (i === 3 && progress >= ASSEMBLED_START);
-                el.classList.toggle('visible', isActive);
+                el.classList.toggle('visible', i === activeLayer && progress > i * PHASE + 0.02);
             });
 
             // Dots
