@@ -1019,43 +1019,43 @@
             transform: translateY(0);
         }
 
-        /* ── MOBILE CAROUSEL: capas sin sticky ── */
+        /* ── MOBILE CAROUSEL ── */
         .assembly-mobile {
             display: none;
         }
 
+        /* El stage tiene el mismo #0a0a0a que el fondo de las imágenes DALL-E
+           → sin blend mode, sin trucos, el borde imagen/fondo es invisible */
         .mobile-stage {
             position: relative;
             width: 100%;
-            /* Aspect ratio ~1.9:1 de las imágenes */
-            padding-bottom: 53%;
-            background: #000000;
-            /* CRÍTICO: sin overflow, transform, will-change ni filter
-               para no crear stacking context que rompe mix-blend-mode en Safari iOS */
+            border-radius: 16px;
+            background: #0a0a0a;
+            border: 1px solid rgba(45, 139, 122, 0.2);
+            overflow: hidden;
+            /* Mantener aspect ratio sin position:absolute en hijos */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
         }
 
         .mobile-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            max-width: 100%;
+            display: none;
             object-fit: contain;
-            mix-blend-mode: screen;
-            opacity: 0;
-            transition: opacity 0.45s ease;
         }
 
         .mobile-layer.active {
-            opacity: 1;
+            display: block;
         }
 
         .mobile-caption {
             margin-top: 1rem;
-            font-size: 13.5px;
-            color: rgba(255, 255, 255, 0.55);
-            min-height: 24px;
-            transition: opacity 0.3s;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            min-height: 22px;
         }
 
         .mobile-dots {
@@ -1069,9 +1069,9 @@
             width: 28px;
             height: 3px;
             border-radius: 2px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.25s;
         }
 
         .mobile-dot.active {
@@ -1083,7 +1083,7 @@
             font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.18);
         }
 
         @media (max-width: 900px) {
@@ -1684,20 +1684,23 @@
             mobileActive = (idx + 4) % 4;
             mobileLayers[mobileActive].classList.add('active');
             mobileDots[mobileActive].classList.add('active');
-            document.getElementById('mobileCaption').textContent = mobileCaptions[mobileActive];
+            const cap = document.getElementById('mobileCaption');
+            if (cap) cap.textContent = mobileCaptions[mobileActive];
         }
 
-        // Swipe support
-        const mobileStage = document.getElementById('mobileStage');
-        if (mobileStage) {
+        // Swipe + tap
+        const mobileStageEl = document.getElementById('mobileStage');
+        if (mobileStageEl) {
             let tx = 0;
-            mobileStage.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
-            mobileStage.addEventListener('touchend', e => {
+            mobileStageEl.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+            mobileStageEl.addEventListener('touchend', e => {
                 const diff = tx - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 40) setMobileLayer(mobileActive + (diff > 0 ? 1 : -1));
+                if (Math.abs(diff) > 40) {
+                    setMobileLayer(mobileActive + (diff > 0 ? 1 : -1));
+                } else {
+                    setMobileLayer(mobileActive + 1); // tap = avanzar
+                }
             }, { passive: true });
-            // Tap to advance
-            mobileStage.addEventListener('click', () => setMobileLayer(mobileActive + 1));
         }
 
         // ── NAVBAR ──
