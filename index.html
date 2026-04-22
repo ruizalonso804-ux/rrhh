@@ -380,6 +380,7 @@
         .assembly-wrapper {
             position: relative;
             height: 500vh;
+            background: #0a0a0a;
         }
 
         .assembly-sticky {
@@ -390,8 +391,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            clip-path: inset(0);
-            background: var(--black);
+            overflow: hidden;
+            background: #0a0a0a;
         }
 
         /* Glow central */
@@ -446,7 +447,6 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 720px;
-            mix-blend-mode: screen;
             pointer-events: none;
         }
 
