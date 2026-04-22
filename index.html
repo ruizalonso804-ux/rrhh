@@ -3,926 +3,1459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Empleo | Zonda Tech Chile</title>
+    <title>Zonda Tech Chile — Tecnología Gaming para Latinoamérica</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #2D8B7A;
+            --green-dark: #1B5E4C;
+            --green-glow: rgba(45,139,122,0.35);
+            --black: #000000;
+            --gray-900: #0a0a0a;
+            --gray-800: #111111;
+            --gray-700: #1a1a1a;
+            --gray-500: #666;
+            --gray-300: #aaa;
+            --white: #ffffff;
+        }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
         }
 
         /* ── NAVBAR ── */
         .navbar {
-            background: linear-gradient(to right, #1B5E4C, #2D8B7A);
-            color: white;
-            padding: 0.75rem 2rem;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0 2.5rem;
+            height: 60px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            justify-content: space-between;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.3s;
         }
 
         .navbar-logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
-        .navbar-logo img {
-            height: 56px;
-            width: auto;
-        }
+        .navbar-logo img { height: 36px; width: auto; }
 
         .navbar-logo span {
-            font-family: 'Rajdhani', 'Impact', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
-            font-size: 26px;
+            font-size: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: white;
-            line-height: 1;
         }
 
-        .navbar-right {
+        .navbar-links {
             display: flex;
-            align-items: center;
-            gap: 2rem;
+            gap: 2.2rem;
+            list-style: none;
         }
 
-        .navbar-right a {
-            color: rgba(255,255,255,0.85);
+        .navbar-links a {
+            color: rgba(255,255,255,0.75);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 500;
+            letter-spacing: 0.3px;
             transition: color 0.2s;
         }
 
-        .navbar-right a:hover { color: white; }
+        .navbar-links a:hover { color: white; }
 
-        /* ── HAMBURGER ── */
+        .navbar-links .nav-cta {
+            background: var(--green);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .navbar-links .nav-cta:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        /* hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
-            padding: 4px;
             background: none;
             border: none;
+            padding: 4px;
         }
 
         .hamburger span {
             display: block;
-            width: 24px;
+            width: 22px;
             height: 2px;
             background: white;
             border-radius: 2px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .hamburger.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, #0d3d30 0%, #1B5E4C 50%, #2D8B7A 100%);
-            color: white;
-            padding: 5rem 2rem 4rem;
-            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
+            background: var(--black);
+            padding: 0 2.5rem;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -60px; right: -60px;
-            width: 320px; height: 320px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 50%;
+            top: -200px; left: -200px;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(45,139,122,0.18) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -80px; left: -40px;
-            width: 260px; height: 260px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding-top: 60px;
         }
 
-        .hero-badge {
+        .hero-text .hero-badge {
             display: inline-block;
-            background: rgba(95,201,160,0.25);
-            border: 1px solid rgba(95,201,160,0.5);
-            color: #A8EDD4;
+            background: rgba(45,139,122,0.15);
+            border: 1px solid rgba(45,139,122,0.4);
+            color: var(--green);
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 {
-            font-size: 42px;
+        .hero-text h1 {
+            font-size: clamp(42px, 6vw, 88px);
             font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 1.2rem;
         }
 
-        .hero p {
+        .hero-text h1 span {
+            background: linear-gradient(135deg, #fff 30%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
             font-size: 18px;
-            opacity: 0.9;
-            max-width: 620px;
-            margin: 0 auto 2.5rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
         }
 
-        .hero-stats {
+        .hero-buttons {
             display: flex;
-            justify-content: center;
-            gap: 3rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 2.5rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid rgba(255,255,255,0.15);
         }
 
-        .hero-stat-item { text-align: center; }
+        .btn-primary {
+            background: var(--green);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
 
-        .hero-stat-value {
-            font-size: 32px;
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(45,139,122,0.4);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.25);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+        }
+
+        /* Glow de fondo detrás del teclado */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 520px; height: 260px;
+            background: radial-gradient(ellipse, rgba(45,139,122,0.28) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+            50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 580px;
+            mix-blend-mode: screen;
+            position: relative;
+            z-index: 1;
+            animation: floatKbd 5s ease-in-out infinite;
+        }
+
+        @keyframes floatKbd {
+            0%, 100% { transform: translateY(0px) rotateX(2deg); }
+            50%       { transform: translateY(-14px) rotateX(-1deg); }
+        }
+
+        /* Linha de luz horizontal */
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: 28%;
+            left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(45,139,122,0.6), transparent);
+            animation: lineFade 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes lineFade {
+            0%, 100% { opacity: 0.4; }
+            50%       { opacity: 0.9; }
+        }
+
+        /* Partículas flotantes */
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-particles span {
+            position: absolute;
+            width: 2px; height: 2px;
+            border-radius: 50%;
+            background: var(--green);
+            opacity: 0;
+            animation: particleFloat var(--dur, 4s) var(--delay, 0s) ease-in-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0%   { opacity: 0;   transform: translateY(0)   scale(1); }
+            20%  { opacity: 0.8; }
+            80%  { opacity: 0.5; }
+            100% { opacity: 0;   transform: translateY(-80px) scale(0.3); }
+        }
+
+        /* ── KEYBOARD ASSEMBLY SCROLL ── */
+        .assembly-wrapper {
+            position: relative;
+            height: 500vh;
+        }
+
+        .assembly-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        /* Glow central */
+        .assembly-sticky::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; height: 400px;
+            background: radial-gradient(ellipse, rgba(45,139,122,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Título arriba */
+        .assembly-heading {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            z-index: 2;
+        }
+
+        .assembly-heading .assembly-section-label {
+            font-size: 11px;
             font-weight: 700;
-            color: #5FC9A0;
-        }
-
-        .hero-stat-label {
-            font-size: 12px;
-            opacity: 0.75;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            color: var(--green);
+            margin-bottom: 0.5rem;
         }
 
-        /* ── CONTAINER ── */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        .assembly-heading h2 {
+            font-size: clamp(28px, 4vw, 52px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
-        /* ── SECCIÓN GENÉRICA ── */
-        .section {
-            padding: 4rem 0;
+        /* Stage: imagen grande centrada */
+        .assembly-stage {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            height: 380px;
+            z-index: 2;
+        }
+
+        .layer-img {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 720px;
+            will-change: transform, opacity;
+            pointer-events: none;
+        }
+
+        /* Etiqueta de capa activa */
+        .assembly-layer-label {
+            margin-top: 1.2rem;
+            z-index: 2;
+            text-align: center;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .layer-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            position: absolute;
+        }
+
+        .layer-name.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dots */
+        .assembly-progress {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            z-index: 2;
+        }
+
+        .progress-dot {
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.15);
+            transition: background 0.3s, width 0.3s;
+        }
+
+        .progress-dot.active {
+            background: var(--green);
+            width: 48px;
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 2;
+            transition: opacity 0.4s;
+        }
+
+        .scroll-hint svg {
+            animation: bounceDown 1.6s ease-in-out infinite;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(5px); }
+        }
+
+        /* ── PRODUCTS ── */
+        .products-section {
+            padding: 120px 2.5rem;
+            background: var(--black);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
         .section-label {
             font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: #2D8B7A;
-            margin-bottom: 0.5rem;
+            color: var(--green);
+            margin-bottom: 1rem;
         }
 
         .section-title {
-            font-size: 30px;
+            font-size: clamp(32px, 4.5vw, 56px);
             font-weight: 700;
-            color: #1B5E4C;
-            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .section-subtitle {
-            font-size: 16px;
-            color: #666;
-            max-width: 600px;
-            line-height: 1.7;
+            font-size: 17px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 1rem;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
-        /* ── SOBRE ZONDA TECH ── */
-        .about-grid {
+        /* Bento grid */
+        .products-bento {
+            max-width: 1100px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2.5rem;
-        }
-
-        .about-text p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            font-size: 15px;
-        }
-
-        .about-highlights {
-            display: flex;
-            flex-direction: column;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: 400px 320px;
             gap: 1rem;
         }
 
-        .about-highlight-item {
-            background: white;
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            border-left: 4px solid #2D8B7A;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        .bento-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: default;
+            transition: border-color 0.35s, box-shadow 0.35s;
         }
 
-        .about-highlight-item h4 {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1B5E4C;
-            margin-bottom: 0.25rem;
+        .bento-card:hover {
+            border-color: rgba(45,139,122,0.35);
+            box-shadow: 0 0 0 1px rgba(45,139,122,0.15), 0 24px 60px rgba(0,0,0,0.6);
         }
 
-        .about-highlight-item p {
+        /* Card grande: teclado */
+        .bento-card.bento-main {
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Cards pequeñas */
+        .bento-card.bento-sm {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Imagen de fondo centrada */
+        .bento-img {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 2rem 5rem;
+        }
+
+        .bento-img img {
+            width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+        }
+
+        .bento-card:hover .bento-img img {
+            transform: scale(1.06) translateY(-6px);
+            filter: drop-shadow(0 20px 48px rgba(45,139,122,0.5));
+        }
+
+        /* Overlay gradiente en la base */
+        .bento-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 55%;
+            background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Texto sobre el gradiente */
+        .bento-info {
+            position: relative;
+            z-index: 2;
+            padding: 1.4rem 1.6rem 1.8rem;
+        }
+
+        .bento-tag {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 4px;
+        }
+
+        .bento-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .bento-card.bento-main .bento-name { font-size: 26px; }
+
+        .bento-spec {
             font-size: 13px;
-            color: #666;
+            color: rgba(255,255,255,0.45);
             line-height: 1.5;
         }
 
-        /* ── CIFRAS ── */
+        /* Partículas bento */
+        .bento-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .bento-particles span {
+            position: absolute;
+            width: 2px; height: 2px;
+            border-radius: 50%;
+            background: var(--green);
+            opacity: 0;
+            animation: particleFloat var(--dur, 4s) var(--delay, 0s) ease-in-out infinite;
+        }
+
+        /* Pill de badge */
+        .bento-badge {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.4rem;
+            z-index: 3;
+            background: rgba(45,139,122,0.18);
+            border: 1px solid rgba(45,139,122,0.4);
+            color: var(--green);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* ── STATS ── */
         .stats-section {
-            background: linear-gradient(135deg, #1B5E4C 0%, #2D8B7A 100%);
-            padding: 4rem 0;
-            color: white;
+            padding: 100px 2.5rem;
+            background: var(--black);
         }
 
         .stats-grid {
+            max-width: 1000px;
+            margin: 4rem auto 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 1px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .stat-item {
+            background: var(--gray-900);
+            padding: 3rem 2rem;
             text-align: center;
         }
 
-        .stat-item {}
-
         .stat-value {
-            font-size: 40px;
+            font-size: clamp(32px, 4vw, 52px);
             font-weight: 700;
-            color: #5FC9A0;
-            line-height: 1;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 40%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 14px;
-            opacity: 0.85;
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
             line-height: 1.4;
         }
 
-        /* ── VALORES ── */
-        .values-grid {
+        /* ── CULTURE ── */
+        .culture-section {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .culture-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('office_culture.png');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) saturate(0.7);
+        }
+
+        .culture-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(27,94,76,0.25) 100%);
+        }
+
+        .culture-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 2.5rem;
+            width: 100%;
+        }
+
+        .culture-values {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2.5rem;
+            gap: 2rem;
+            margin-top: 3.5rem;
         }
 
         .value-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.75rem;
-            border: 1px solid #e8e8e8;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
         }
 
         .value-card:hover {
+            border-color: rgba(45,139,122,0.5);
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
         .value-icon {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 1rem;
         }
 
         .value-card h4 {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #1B5E4C;
             margin-bottom: 0.5rem;
         }
 
         .value-card p {
-            font-size: 13px;
-            color: #666;
+            font-size: 13.5px;
+            color: rgba(255,255,255,0.55);
             line-height: 1.6;
         }
 
-        /* ── BENEFICIOS ── */
-        .benefits-section {
-            background: #F5F8F6;
-            padding: 4rem 0;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-top: 2.5rem;
-        }
-
-        .benefit-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            border: 1px solid #e8e8e8;
-        }
-
-        .benefit-icon {
-            width: 44px;
-            height: 44px;
-            background: #E1F5EE;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .benefit-text h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1B5E4C;
-            margin-bottom: 0.25rem;
-        }
-
-        .benefit-text p {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* ── PUESTOS DISPONIBLES ── */
+        /* ── JOBS ── */
         .jobs-section {
-            padding: 4rem 0 5rem;
+            padding: 120px 2.5rem;
+            background: var(--gray-900);
         }
 
-        .jobs-header {
+        .jobs-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .jobs-list {
+            margin-top: 3rem;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
-        }
-
-        .jobs-count {
-            font-size: 14px;
-            color: #888;
-            font-weight: 500;
-        }
-
-        .jobs-count span {
-            color: #2D8B7A;
-            font-weight: 700;
         }
 
         .job-card {
-            background: white;
-            border-radius: 12px;
-            border: 1px solid #e0e0e0;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 1.5rem;
+            background: var(--gray-800);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            display: flex;
             align-items: center;
-            transition: box-shadow 0.25s ease, border-color 0.25s ease;
-            margin-bottom: 1rem;
+            justify-content: space-between;
+            gap: 1.5rem;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
         }
 
         .job-card:hover {
-            box-shadow: 0 6px 20px rgba(0,0,0,0.09);
-            border-color: #2D8B7A;
+            border-color: rgba(45,139,122,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
         }
 
+        .job-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            flex-shrink: 0;
+        }
+
+        .job-info { flex: 1; }
+
         .job-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1B5E4C;
-            margin-bottom: 0.5rem;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
         }
 
         .job-meta {
             display: flex;
+            gap: 1.2rem;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
         }
 
-        .job-meta-item {
+        .job-meta span {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 13px;
-            color: #666;
-        }
-
-        .job-meta-item svg {
-            color: #2D8B7A;
-            flex-shrink: 0;
         }
 
         .job-tags {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.6rem;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+        .job-tag {
+            font-size: 11px;
             font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
         }
 
-        .tag-area {
-            background: #E1F5EE;
-            color: #0F6E56;
-            border: 1px solid #9FE1CB;
-        }
-
-        .tag-modality {
-            background: #EEF2FF;
-            color: #3730A3;
-            border: 1px solid #C7D2FE;
-        }
-
-        .tag-internal {
-            background: #FFF7ED;
-            color: #C2410C;
-            border: 1px solid #FED7AA;
-        }
-
-        .job-date {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 0.5rem;
-        }
-
-        .job-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0.75rem;
-        }
+        .tag-area { background: rgba(45,139,122,0.15); color: #4db8a8; border: 1px solid rgba(45,139,122,0.3); }
+        .tag-mode { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
 
         .btn-ver {
-            background: linear-gradient(135deg, #1B5E4C, #2D8B7A);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
+            background: transparent;
+            border: 1px solid rgba(45,139,122,0.6);
+            color: var(--green);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 13.5px;
             font-weight: 600;
-            font-size: 14px;
             text-decoration: none;
-            transition: opacity 0.2s, transform 0.2s;
             white-space: nowrap;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
         }
 
         .btn-ver:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .job-status {
-            font-size: 12px;
-            color: #16A34A;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .job-status::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #16A34A;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        /* ── CTA BOTTOM ── */
-        .cta-bottom {
-            background: linear-gradient(135deg, #0d3d30 0%, #1B5E4C 100%);
+            background: var(--green);
             color: white;
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
-        .cta-bottom h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .cta-bottom p {
-            font-size: 16px;
-            opacity: 0.85;
-            max-width: 520px;
-            margin: 0 auto 1.75rem;
-        }
-
-        .cta-email {
-            font-size: 18px;
-            font-weight: 600;
-            color: #5FC9A0;
+            transform: translateY(-1px);
         }
 
         /* ── FOOTER ── */
         footer {
-            background: #0d2e24;
-            color: rgba(255,255,255,0.6);
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 3rem 2.5rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .footer-logo img { height: 32px; }
+
+        .footer-logo span {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-copy {
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.3);
             text-align: center;
-            padding: 1.75rem 2rem;
         }
 
-        footer p {
+        .footer-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .footer-links a {
             font-size: 13px;
-            margin: 0.3rem 0;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: color 0.2s;
         }
 
-        /* ── DIVIDER ── */
-        .divider {
-            height: 1px;
-            background: #e8e8e8;
-            margin: 0;
+        .footer-links a:hover { color: var(--green); }
+
+        /* ── REVEAL ON SCROLL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; }
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2.5rem;
+            }
+
+            .hero-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-image { min-height: 340px; }
+            .hero-image img { max-width: 380px; }
+
+            .assembly-stage { height: 260px; max-width: 500px; }
+            .layer-img { max-width: 500px; }
+
+            .products-bento {
+                grid-template-columns: 1fr;
+                grid-template-rows: 380px 280px 280px 220px;
+            }
+            .bento-card.bento-main { grid-row: span 1; }
+
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .values-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .culture-values { grid-template-columns: 1fr; }
+
+            .job-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .btn-ver { align-self: flex-start; }
+
+            .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
+            .navbar { padding: 0 1.2rem; }
+            .navbar-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: rgba(0,0,0,0.95); padding: 1.5rem 2rem; gap: 1.2rem; }
+            .navbar-links.open { display: flex; }
             .hamburger { display: flex; }
 
-            .navbar-right {
-                display: none;
-                flex-direction: column;
-                gap: 0;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: linear-gradient(to right, #1B5E4C, #2D8B7A);
-                padding: 0.5rem 1.5rem 1rem;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                z-index: 99;
+            .hero { padding: 80px 1.2rem 3rem; }
+            .hero-text h1 { font-size: 36px; letter-spacing: -1px; }
+            .hero-text p { font-size: 15px; }
+            .hero-image { min-height: 240px; }
+            .hero-image img { max-width: 240px; }
+
+            .assembly-wrapper { height: 280vh; }
+            .assembly-stage { height: 180px; max-width: 300px; }
+            .layer-img { max-width: 300px; }
+            .assembly-heading h2 { font-size: 22px; }
+            .assembly-section-label { font-size: 10px; }
+            .feature-label { font-size: 12px; padding: 6px 12px; }
+
+            .products-section,
+            .stats-section,
+            .jobs-section { padding: 60px 1.2rem; }
+
+            .products-bento {
+                grid-template-rows: 300px 240px 240px 180px;
             }
 
-            .navbar-right.open { display: flex; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item { padding: 1.5rem 0.8rem; }
+            .stat-number { font-size: 36px; }
 
-            .navbar-right a {
-                padding: 12px 0;
-                font-size: 15px;
-                border-bottom: 1px solid rgba(255,255,255,0.15);
-            }
+            .culture-content { padding: 60px 1.2rem; }
+            .culture-title { font-size: 28px; }
 
-            .navbar-right a:last-child { border-bottom: none; }
-
-            .navbar { position: sticky; top: 0; }
-
-            .hero { padding: 3rem 1.5rem 2.5rem; }
-            .hero h1 { font-size: 28px; }
-            .hero p { font-size: 15px; }
-            .hero-stats { gap: 1.5rem; }
-            .hero-stat-value { font-size: 24px; }
-
-            .section { padding: 3rem 0; }
-            .section-title { font-size: 24px; }
-            .stats-section { padding: 3rem 0; }
-
-            .values-grid { grid-template-columns: 1fr; }
-            .benefits-grid { grid-template-columns: 1fr; }
-
-            .job-card {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
-            }
-            .job-actions { align-items: flex-start; }
-            .btn-ver { width: 100%; text-align: center; }
-
-            .navbar-logo span { font-size: 20px; }
-            .navbar-logo img { height: 44px; }
-
-            .cta-bottom { padding: 3rem 1.5rem; }
-            .cta-bottom h2 { font-size: 22px; }
+            .jobs-title { font-size: 28px; }
+            .job-role { font-size: 16px; }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 24px; }
-            .hero-stats { grid-template-columns: repeat(2, 1fr); display: grid; gap: 1rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-            .stat-value { font-size: 30px; }
-            .job-title { font-size: 17px; }
-            .navbar-logo span { font-size: 17px; letter-spacing: 1px; }
-            .navbar-logo img { height: 38px; }
+        @media (max-width: 400px) {
+            .hero-text h1 { font-size: 30px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-number { font-size: 30px; }
+            .bento-title { font-size: 15px; }
         }
     </style>
 </head>
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="/" class="navbar-logo">
+    <nav class="navbar" id="navbar">
+        <a href="#" class="navbar-logo">
             <img src="logo_zonda_tech.png" alt="Zonda Tech Chile">
-            <span>Zonda Tech Chile</span>
+            <span>Zonda Tech</span>
         </a>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
-        <div class="navbar-right" id="navLinks">
-            <a href="#sobre-nosotros" onclick="closeMenu()">Sobre Nosotros</a>
-            <a href="#puestos" onclick="closeMenu()">Puestos Disponibles</a>
-            <a href="#contacto" onclick="closeMenu()">Contacto</a>
-        </div>
+        <ul class="navbar-links" id="navLinks">
+            <li><a href="#productos" onclick="closeMenu()">Productos</a></li>
+            <li><a href="#nosotros" onclick="closeMenu()">Nosotros</a></li>
+            <li><a href="#cultura" onclick="closeMenu()">Cultura</a></li>
+            <li><a href="#empleos" onclick="closeMenu()" class="nav-cta">Empleos</a></li>
+        </ul>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-badge">Portal Interno de Empleo</div>
-            <h1>Crece con Zonda Tech Chile</h1>
-            <p>Explora las oportunidades de carrera disponibles y sé parte del equipo que está transformando la tecnología en Latinoamérica.</p>
-
-            <div class="hero-stats">
-                <div class="hero-stat-item">
-                    <div class="hero-stat-value">+5</div>
-                    <div class="hero-stat-label">Años en el mercado</div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Tecnología Gaming · Latinoamérica</div>
+                <h1>Redefiniendo el<br><span>gaming en LATAM</span></h1>
+                <p>Diseñamos y comercializamos periféricos gaming e inteligentes de alto rendimiento. Nacimos en Chile, pensamos en toda Latinoamérica.</p>
+                <div class="hero-buttons">
+                    <a href="#productos" class="btn-primary">Ver productos</a>
+                    <a href="#empleos" class="btn-ghost">Trabaja con nosotros</a>
                 </div>
-                <div class="hero-stat-item">
-                    <div class="hero-stat-value">4</div>
-                    <div class="hero-stat-label">Países LATAM</div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-particles">
+                    <span style="left:15%;top:70%;--dur:3.8s;--delay:0s;width:3px;height:3px;"></span>
+                    <span style="left:28%;top:55%;--dur:4.5s;--delay:0.7s;"></span>
+                    <span style="left:42%;top:80%;--dur:3.2s;--delay:1.1s;width:3px;height:3px;"></span>
+                    <span style="left:60%;top:65%;--dur:5.1s;--delay:0.3s;"></span>
+                    <span style="left:72%;top:75%;--dur:4.0s;--delay:1.8s;width:3px;height:3px;"></span>
+                    <span style="left:82%;top:60%;--dur:3.6s;--delay:0.9s;"></span>
+                    <span style="left:50%;top:85%;--dur:4.8s;--delay:0.5s;width:3px;height:3px;"></span>
+                    <span style="left:35%;top:72%;--dur:3.4s;--delay:2.1s;"></span>
                 </div>
-                <div class="hero-stat-item">
-                    <div class="hero-stat-value">CAGR 18%</div>
-                    <div class="hero-stat-label">Crecimiento anual</div>
-                </div>
-                <div class="hero-stat-item">
-                    <div class="hero-stat-value">450M</div>
-                    <div class="hero-stat-label">Mercado potencial</div>
-                </div>
+                <img src="keyboard_hero.png" alt="Teclado mecánico Zonda Tech">
             </div>
         </div>
     </section>
 
-    <!-- SOBRE NOSOTROS -->
-    <section class="section" id="sobre-nosotros">
-        <div class="container">
+    <!-- KEYBOARD ASSEMBLY SCROLL -->
+    <div class="assembly-wrapper" id="assembly-section">
+        <div class="assembly-sticky">
+
+            <!-- Título -->
+            <div class="assembly-heading">
+                <div class="assembly-section-label">Ingeniería de precisión</div>
+                <h2>Construido capa por capa</h2>
+            </div>
+
+            <!-- Imagen grande centrada — capas apiladas con mix-blend-mode -->
+            <div class="assembly-stage">
+                <img src="layer_base.png"     alt="Carcasa"  class="layer-img" id="layer-0">
+                <img src="layer_pcb.png"      alt="PCB"      class="layer-img" id="layer-1">
+                <img src="layer_switches.png" alt="Switches" class="layer-img" id="layer-2">
+                <img src="layer_keycaps.png"  alt="Keycaps"  class="layer-img" id="layer-3">
+            </div>
+
+            <!-- Nombre de capa activa -->
+            <div class="assembly-layer-label">
+                <span class="layer-name" id="lname-0">① Carcasa CNC de aluminio aeronáutico</span>
+                <span class="layer-name" id="lname-1">② PCB con LEDs RGB individuales por tecla</span>
+                <span class="layer-name" id="lname-2">③ Switches mecánicos · 100M pulsaciones</span>
+                <span class="layer-name" id="lname-3">④ Keycaps PBT doble inyección · Anti-huellas</span>
+            </div>
+
+            <!-- Dots progreso -->
+            <div class="assembly-progress">
+                <div class="progress-dot" id="dot-0"></div>
+                <div class="progress-dot" id="dot-1"></div>
+                <div class="progress-dot" id="dot-2"></div>
+                <div class="progress-dot" id="dot-3"></div>
+            </div>
+
+            <!-- Scroll hint (desaparece al avanzar) -->
+            <div class="scroll-hint" id="scroll-hint">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                Scroll
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <section class="products-section" id="productos">
+        <div class="section-header reveal">
+            <div class="section-label">Línea ZT</div>
+            <div class="section-title">Equipos de alta precisión</div>
+        </div>
+
+        <div class="products-bento">
+
+            <!-- Teclado — card grande izquierda -->
+            <div class="bento-card bento-main reveal">
+                <div class="bento-badge">Más vendido</div>
+                <div class="bento-particles">
+                    <span style="left:12%;top:75%;--dur:3.8s;--delay:0s;width:3px;height:3px;"></span>
+                    <span style="left:25%;top:80%;--dur:4.5s;--delay:0.6s;"></span>
+                    <span style="left:40%;top:70%;--dur:3.3s;--delay:1.2s;width:3px;height:3px;"></span>
+                    <span style="left:55%;top:82%;--dur:5.0s;--delay:0.4s;"></span>
+                    <span style="left:68%;top:74%;--dur:3.7s;--delay:1.7s;"></span>
+                    <span style="left:80%;top:78%;--dur:4.2s;--delay:0.9s;width:3px;height:3px;"></span>
+                </div>
+                <div class="bento-img">
+                    <img src="keyboard_hero.png" alt="Teclado Mecánico ZT-K1">
+                </div>
+                <div class="bento-overlay"></div>
+                <div class="bento-info">
+                    <div class="bento-tag">Teclado Mecánico</div>
+                    <div class="bento-name">ZT-K1 Pro</div>
+                    <div class="bento-spec">Switches lineales · RGB por tecla · Bluetooth 5.0 + USB-C</div>
+                </div>
+            </div>
+
+            <!-- Mouse — card pequeña arriba derecha -->
+            <div class="bento-card bento-sm reveal">
+                <div class="bento-particles">
+                    <span style="left:20%;top:70%;--dur:3.5s;--delay:0.3s;width:3px;height:3px;"></span>
+                    <span style="left:45%;top:80%;--dur:4.2s;--delay:1.0s;"></span>
+                    <span style="left:70%;top:72%;--dur:3.9s;--delay:0.5s;width:3px;height:3px;"></span>
+                    <span style="left:60%;top:85%;--dur:4.6s;--delay:1.4s;"></span>
+                </div>
+                <div class="bento-img">
+                    <img src="product_mouse.png" alt="Mouse ZT-M Pro">
+                </div>
+                <div class="bento-overlay"></div>
+                <div class="bento-info">
+                    <div class="bento-tag">Mouse Gaming</div>
+                    <div class="bento-name">ZT-M Pro</div>
+                    <div class="bento-spec">25.600 DPI · 7 botones programables</div>
+                </div>
+            </div>
+
+            <!-- Headset — card pequeña abajo derecha -->
+            <div class="bento-card bento-sm reveal">
+                <div class="bento-particles">
+                    <span style="left:18%;top:75%;--dur:4.1s;--delay:0.8s;width:3px;height:3px;"></span>
+                    <span style="left:50%;top:82%;--dur:3.6s;--delay:0.2s;"></span>
+                    <span style="left:75%;top:70%;--dur:4.8s;--delay:1.3s;width:3px;height:3px;"></span>
+                    <span style="left:35%;top:78%;--dur:3.4s;--delay:1.9s;"></span>
+                </div>
+                <div class="bento-img">
+                    <img src="product_headset.png" alt="Headset ZT-H1">
+                </div>
+                <div class="bento-overlay"></div>
+                <div class="bento-info">
+                    <div class="bento-tag">Headset</div>
+                    <div class="bento-name">ZT-H1</div>
+                    <div class="bento-spec">7.1 Surround · Drivers 50mm · Mic con ANC</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mousepad — fila completa abajo -->
+        <div class="products-bento" style="margin-top: 1rem; grid-template-columns: 1fr; grid-template-rows: 260px;">
+            <div class="bento-card reveal" style="display:flex; flex-direction:column; justify-content:flex-end;">
+                <div class="bento-badge">Nuevo</div>
+                <div class="bento-particles">
+                    <span style="left:10%;top:70%;--dur:4.3s;--delay:0.2s;width:3px;height:3px;"></span>
+                    <span style="left:25%;top:80%;--dur:3.7s;--delay:0.8s;"></span>
+                    <span style="left:45%;top:72%;--dur:5.0s;--delay:1.1s;width:3px;height:3px;"></span>
+                    <span style="left:62%;top:78%;--dur:3.5s;--delay:0.4s;"></span>
+                    <span style="left:78%;top:68%;--dur:4.4s;--delay:1.6s;width:3px;height:3px;"></span>
+                    <span style="left:88%;top:82%;--dur:3.9s;--delay:0.7s;"></span>
+                </div>
+                <div class="bento-img" style="padding-bottom: 4rem;">
+                    <img src="product_mousepad.png" alt="Mousepad ZT-P1" style="max-height: 200px;">
+                </div>
+                <div class="bento-overlay"></div>
+                <div class="bento-info">
+                    <div class="bento-tag">Mousepad XL</div>
+                    <div class="bento-name">ZT-P1 Extended</div>
+                    <div class="bento-spec">900×400mm · Superficie textil de alta velocidad · RGB perimetral de 16 zonas</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- STATS / NOSOTROS -->
+    <section class="stats-section" id="nosotros">
+        <div class="section-header reveal">
             <div class="section-label">Quiénes somos</div>
-            <div class="section-title">Tecnología chilena con visión global</div>
-            <p class="section-subtitle">Conoce la empresa detrás de las oportunidades y por qué Zonda Tech es un lugar donde tu carrera puede crecer.</p>
-
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>Zonda Tech Chile es una empresa nacional especializada en el diseño, desarrollo y comercialización de <strong>dispositivos inteligentes, accesorios tecnológicos y periféricos gaming</strong> de alta calidad.</p>
-                    <p>Nacimos con la convicción de que la tecnología de punta no debía ser exclusiva de grandes mercados. Hoy operamos desde Santiago con una visión clara de expansión hacia México, Colombia, Perú y Argentina.</p>
-                    <p>Nuestro equipo combina talento local con mentalidad global: somos ágiles, orientados a datos y apasionados por la innovación. Cada producto que lanzamos al mercado lleva el sello de quienes trabajan aquí.</p>
-                </div>
-                <div class="about-highlights">
-                    <div class="about-highlight-item">
-                        <h4>Misión</h4>
-                        <p>Crear soluciones tecnológicas innovadoras que potencien la experiencia digital de nuestros clientes, combinando diseño, calidad y accesibilidad.</p>
-                    </div>
-                    <div class="about-highlight-item">
-                        <h4>Visión</h4>
-                        <p>Ser el referente en tecnología, accesorios y gaming en Latinoamérica en los próximos 2 años, consolidando una presencia regional fuerte y reconocible.</p>
-                    </div>
-                    <div class="about-highlight-item">
-                        <h4>Industria</h4>
-                        <p>Tecnología de consumo, periféricos gaming y dispositivos inteligentes (IoT). Segmento de mayor crecimiento en LATAM con +25% anual en gaming.</p>
-                    </div>
-                </div>
+            <div class="section-title">Tecnología chilena,<br>visión latinoamericana</div>
+            <p class="section-subtitle">Nacimos en Santiago con la convicción de que la tecnología de punta no debía ser exclusiva de grandes mercados.</p>
+        </div>
+        <div class="stats-grid reveal">
+            <div class="stat-item">
+                <div class="stat-value" data-target="5">0</div>
+                <div class="stat-label">Años en el mercado</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" data-target="4">0</div>
+                <div class="stat-label">Países en LATAM</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">18%</div>
+                <div class="stat-label">CAGR — Crecimiento anual</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$9M</div>
+                <div class="stat-label">Presupuesto marketing anual</div>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- CIFRAS -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-value">$9M</div>
-                    <div class="stat-label">Presupuesto anual de marketing</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">+30%</div>
-                    <div class="stat-label">ROI objetivo en campañas</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">+60%</div>
-                    <div class="stat-label">Meta de crecimiento en Brand Awareness LATAM</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">+25%</div>
-                    <div class="stat-label">Crecimiento del segmento gaming proyectado</div>
-                </div>
+    <!-- CULTURA -->
+    <section class="culture-section" id="cultura">
+        <div class="culture-bg"></div>
+        <div class="culture-overlay"></div>
+        <div class="culture-content">
+            <div class="section-header reveal" style="text-align:left; margin-bottom:0;">
+                <div class="section-label">Nuestra cultura</div>
+                <div class="section-title">Lo que nos define<br>como equipo</div>
             </div>
-        </div>
-    </section>
-
-    <!-- VALORES -->
-    <section class="section">
-        <div class="container">
-            <div class="section-label">Nuestra cultura</div>
-            <div class="section-title">Lo que nos define como equipo</div>
-            <p class="section-subtitle">Valores que guían cada decisión, cada producto y cada contratación que hacemos.</p>
-
-            <div class="values-grid">
-                <div class="value-card">
+            <div class="culture-values">
+                <div class="value-card reveal">
                     <div class="value-icon">🚀</div>
                     <h4>Innovación constante</h4>
-                    <p>Cuestionamos el statu quo. Buscamos activamente nuevas formas de hacer las cosas y premiamos las ideas que generan impacto.</p>
+                    <p>Cuestionamos el statu quo. Buscamos activamente nuevas formas de hacer las cosas y premiamos las ideas que generan impacto real.</p>
                 </div>
-                <div class="value-card">
+                <div class="value-card reveal">
                     <div class="value-icon">📊</div>
                     <h4>Decisiones basadas en datos</h4>
-                    <p>La intuición suma, pero los datos deciden. Construimos una cultura donde las métricas son el lenguaje común.</p>
+                    <p>La intuición suma, pero los datos deciden. Construimos una cultura donde las métricas son el lenguaje común del equipo.</p>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon">🤝</div>
-                    <h4>Colaboración sin ego</h4>
-                    <p>Los mejores resultados vienen de equipos que comparten conocimiento, se apoyan y celebran los logros colectivos.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">🎯</div>
-                    <h4>Orientación a resultados</h4>
-                    <p>Nos importa el impacto, no las horas. Medimos el éxito en objetivos cumplidos y valor entregado al cliente.</p>
-                </div>
-                <div class="value-card">
+                <div class="value-card reveal">
                     <div class="value-icon">🌎</div>
                     <h4>Visión latinoamericana</h4>
                     <p>Pensamos en grande desde Chile. Nuestra ambición es construir una marca que resuene en toda la región.</p>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon">🌱</div>
-                    <h4>Desarrollo del talento</h4>
-                    <p>Invertimos en el crecimiento de nuestro equipo. Tu desarrollo profesional es parte de nuestra estrategia.</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- BENEFICIOS -->
-    <section class="benefits-section">
-        <div class="container">
-            <div class="section-label">¿Por qué Zonda Tech?</div>
-            <div class="section-title">Beneficios de ser parte del equipo</div>
-            <p class="section-subtitle">Más allá del sueldo, ofrecemos un ambiente donde puedes desarrollarte y tener impacto real.</p>
-
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">💻</div>
-                    <div class="benefit-text">
-                        <h4>Modalidad híbrida</h4>
-                        <p>Flexibilidad para trabajar desde casa y oficina, con equipamiento tecnológico de primera.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📈</div>
-                    <div class="benefit-text">
-                        <h4>Bono por desempeño</h4>
-                        <p>Compensación variable atada a KPIs claros. Tu esfuerzo se traduce directamente en ingresos.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎓</div>
-                    <div class="benefit-text">
-                        <h4>Presupuesto de capacitación</h4>
-                        <p>Acceso a cursos, certificaciones y conferencias del sector tech y gaming en LATAM.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🌐</div>
-                    <div class="benefit-text">
-                        <h4>Exposición internacional</h4>
-                        <p>Trabajarás en proyectos con alcance regional, relacionándote con mercados de toda Latinoamérica.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🏥</div>
-                    <div class="benefit-text">
-                        <h4>Beneficios de salud</h4>
-                        <p>Seguro complementario de salud para el trabajador y su grupo familiar.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎮</div>
-                    <div class="benefit-text">
-                        <h4>Cultura gaming</h4>
-                        <p>Un ambiente de trabajo dinámico donde la pasión por la tecnología y el gaming es parte del día a día.</p>
-                    </div>
-                </div>
+    <!-- EMPLEOS -->
+    <section class="jobs-section" id="empleos">
+        <div class="jobs-container">
+            <div class="section-header reveal">
+                <div class="section-label">Únete al equipo</div>
+                <div class="section-title">Puestos disponibles</div>
+                <p class="section-subtitle">Sé parte de la empresa que está transformando el gaming en Latinoamérica.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- PUESTOS DISPONIBLES -->
-    <section class="jobs-section" id="puestos">
-        <div class="container">
-            <div class="jobs-header">
-                <div>
-                    <div class="section-label">Oportunidades abiertas</div>
-                    <div class="section-title" style="margin-bottom: 0;">Puestos disponibles</div>
-                </div>
-                <div class="jobs-count"><span>1</span> puesto activo</div>
-            </div>
-
-            <!-- TARJETA DE PUESTO -->
-            <div class="job-card">
-                <div class="job-info">
-                    <div class="job-title">Gerente de Marketing Estratégico</div>
-                    <div class="job-meta">
-                        <div class="job-meta-item">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            Santiago, Chile
+            <div class="jobs-list reveal">
+                <div class="job-card">
+                    <div class="job-status-dot"></div>
+                    <div class="job-info">
+                        <div class="job-title">Gerente de Marketing Estratégico</div>
+                        <div class="job-meta">
+                            <span>
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                Santiago, Chile
+                            </span>
+                            <span>
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                                Tiempo completo
+                            </span>
+                            <span>Publicado 8 de abril 2026</span>
                         </div>
-                        <div class="job-meta-item">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-                            Tiempo completo
-                        </div>
-                        <div class="job-meta-item">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-                            Reporta al CEO
+                        <div class="job-tags">
+                            <span class="job-tag tag-area">Marketing</span>
+                            <span class="job-tag tag-mode">Híbrido</span>
+                            <span class="job-tag tag-mode">Reporta al CEO</span>
                         </div>
                     </div>
-                    <div class="job-tags">
-                        <span class="tag tag-area">Marketing</span>
-                        <span class="tag tag-modality">Híbrido</span>
-                        <span class="tag tag-internal">Interna + Externa</span>
-                    </div>
-                    <div class="job-date">Publicado el 8 de abril de 2026 &nbsp;·&nbsp; Cierre estimado: 30 de abril de 2026</div>
-                </div>
-                <div class="job-actions">
-                    <div class="job-status">Activo</div>
-                    <a href="gerente-marketing.html" class="btn-ver">Ver Posición →</a>
+                    <a href="gerente-marketing.html" class="btn-ver">Ver posición →</a>
                 </div>
             </div>
-
-        </div>
-    </section>
-
-    <!-- CTA CONTACTO -->
-    <section class="cta-bottom" id="contacto">
-        <div class="container">
-            <h2>¿Tienes alguna consulta?</h2>
-            <p>Si tienes preguntas sobre algún puesto o el proceso de selección, nuestro equipo de RRHH está disponible para ayudarte.</p>
-            <div class="cta-email">reclutamiento@zondatech.cl</div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Zonda Tech Chile. Todos los derechos reservados.</p>
-        <p>Portal Interno de Empleo · www.zondatech.cl</p>
+        <div class="footer-inner">
+            <a href="#" class="footer-logo">
+                <img src="logo_zonda_tech.png" alt="Zonda Tech Chile">
+                <span>Zonda Tech Chile</span>
+            </a>
+            <div class="footer-copy">
+                &copy; 2026 Zonda Tech Chile. Todos los derechos reservados.
+            </div>
+            <div class="footer-links">
+                <a href="#productos">Productos</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#cultura">Cultura</a>
+                <a href="#empleos">Empleos</a>
+            </div>
+        </div>
     </footer>
 
     <script>
+        // ── NAVBAR ──
         function toggleMenu() {
-            const nav = document.getElementById('navLinks');
-            const btn = document.getElementById('hamburger');
-            nav.classList.toggle('open');
-            btn.classList.toggle('open');
+            document.getElementById('navLinks').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('open');
         }
 
         function closeMenu() {
             document.getElementById('navLinks').classList.remove('open');
             document.getElementById('hamburger').classList.remove('open');
         }
-    </script>
 
+        // ── KEYBOARD ASSEMBLY SCROLL ──
+        const assemblySection = document.getElementById('assembly-section');
+        const scrollHint = document.getElementById('scroll-hint');
+
+        const layers = [
+            document.getElementById('layer-0'),
+            document.getElementById('layer-1'),
+            document.getElementById('layer-2'),
+            document.getElementById('layer-3'),
+        ];
+
+        const lnames = [
+            document.getElementById('lname-0'),
+            document.getElementById('lname-1'),
+            document.getElementById('lname-2'),
+            document.getElementById('lname-3'),
+        ];
+
+        const dots = [
+            document.getElementById('dot-0'),
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2'),
+            document.getElementById('dot-3'),
+        ];
+
+        // Cada fase: una capa visible a la vez con crossfade
+        // Fases: [0-0.22] base, [0.22-0.44] pcb, [0.44-0.66] switches, [0.66-0.88] keycaps
+        // [0.88-1.0] teclado completo ensamblado (keycaps permanece, fantasmas del resto)
+        const PHASE = 0.22;
+        const ASSEMBLED_START = 0.88;
+
+        function updateAssembly() {
+            const rect = assemblySection.getBoundingClientRect();
+            const scrollable = assemblySection.offsetHeight - window.innerHeight;
+            const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+            const activeLayer = Math.min(3, Math.floor(progress / PHASE));
+
+            layers.forEach((layer, i) => {
+                const phaseStart = i * PHASE;
+                const phaseEnd   = phaseStart + PHASE;
+
+                let opacity, translateY, scale;
+
+                if (progress < phaseStart) {
+                    // Todavía no aparece — espera abajo
+                    opacity    = 0;
+                    translateY = 60;
+                    scale      = 0.96;
+
+                } else if (progress < phaseStart + PHASE * 0.45) {
+                    // Entrando (primera mitad de su fase)
+                    const p    = easeOut((progress - phaseStart) / (PHASE * 0.45));
+                    opacity    = p;
+                    translateY = 60 * (1 - p);
+                    scale      = 0.96 + 0.04 * p;
+
+                } else if (progress < phaseEnd && i < 3) {
+                    // Visible plena (segunda mitad de su fase, solo capas 0-2)
+                    opacity    = 1;
+                    translateY = 0;
+                    scale      = 1;
+
+                } else if (i < 3 && progress < ASSEMBLED_START) {
+                    // Saliendo — flota hacia arriba y desaparece
+                    const p    = easeOut(Math.min(1, (progress - phaseEnd) / (PHASE * 0.6)));
+                    opacity    = 1 - p;
+                    translateY = -40 * p;
+                    scale      = 1 - 0.03 * p;
+
+                } else if (i === 3 && progress >= phaseStart) {
+                    // Capa keycaps: entra y se queda hasta el final
+                    if (progress < phaseStart + PHASE * 0.45) {
+                        const p = easeOut((progress - phaseStart) / (PHASE * 0.45));
+                        opacity    = p;
+                        translateY = 60 * (1 - p);
+                        scale      = 0.96 + 0.04 * p;
+                    } else {
+                        opacity    = 1;
+                        translateY = 0;
+                        scale      = 1;
+                    }
+
+                } else if (i < 3 && progress >= ASSEMBLED_START) {
+                    // Fase ensamblado: capas 0-2 reaparecen como fantasmas
+                    const p    = easeOut((progress - ASSEMBLED_START) / 0.12);
+                    opacity    = 0.18 * p;
+                    translateY = 0;
+                    scale      = 1;
+
+                } else {
+                    opacity    = 0;
+                    translateY = 0;
+                    scale      = 1;
+                }
+
+                layer.style.opacity   = opacity;
+                layer.style.transform = `translateX(-50%) translateY(${translateY}px) scale(${scale})`;
+                layer.style.zIndex    = i;
+            });
+
+            // Label activo
+            lnames.forEach((el, i) => {
+                const isActive = (i === activeLayer && progress > i * PHASE + 0.02)
+                              || (progress >= ASSEMBLED_START && i === 3);
+                el.classList.toggle('visible', isActive);
+            });
+
+            // Dots
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === activeLayer));
+
+            // Scroll hint
+            if (scrollHint) scrollHint.style.opacity = progress > 0.04 ? '0' : '1';
+        }
+
+        function easeOut(t) {
+            return 1 - Math.pow(1 - t, 2.5);
+        }
+
+        // ── REVEAL ON SCROLL (IntersectionObserver) ──
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ── COUNTER ANIMATION ──
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.target);
+                if (!target) return;
+                let current = 0;
+                const step = target / 60;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = '+' + Math.floor(current);
+                    if (current >= target) clearInterval(timer);
+                }, 20);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-value[data-target]').forEach(el => counterObserver.observe(el));
+
+        // ── SCROLL LISTENER ──
+        window.addEventListener('scroll', updateAssembly, { passive: true });
+        updateAssembly();
+    </script>
 </body>
 </html>
